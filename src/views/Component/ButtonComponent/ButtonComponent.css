@@ -1,0 +1,21 @@
+.button_lihat{
+    padding: 1%;
+    padding-left: 4%;
+    padding-right: 4%;
+    margin-top: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+    border-width: 2px;
+    border-style: solid;
+    font-family: 'Segoe UI Bold';
+}
+
+.link_lihat {
+    display: contents;
+}
+
+.link_lihat:hover {
+    text-decoration: none;
+}
