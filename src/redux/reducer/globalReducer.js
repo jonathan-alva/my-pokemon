@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from "redux";
 import API from '../../service';
 
 const globalState = {
-    pokemonTypes: [],
+    pokemonType: [],
 }
 
 //reducer 
@@ -13,7 +13,7 @@ function rootReducer(state = globalState, action) {
         case ActionType.GET_POKEMON_TYPES:
             return {
                 ...state,
-                pokemonTypes: action.pokemonTypes,
+                pokemonType: action.pokemonType,
 
             };
         
@@ -24,8 +24,8 @@ function rootReducer(state = globalState, action) {
 
 export const getInitalData = () => async dispatch => {
     try {
-        let pokemonTypes = await API.getPokemonTypes();
-        dispatch({ type: ActionType.GET_POKEMON_TYPES, pokemonTypes });
+        let pokemonType = await API.getPokemonTypes();
+        dispatch({ type: ActionType.GET_POKEMON_TYPES, pokemonType });
         
     } catch (error) {
         console.log(error);

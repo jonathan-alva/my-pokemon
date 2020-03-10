@@ -20,7 +20,7 @@ class PokemonHome extends Component {
                         <div className="mb-5 pb-5 pt-5" style={{backgroundColor: "#ebebeb"}}>
                             <div className="user-img mb-4"/>
                             <h1 className="orange">Jonathan Alva</h1>
-                            <p>
+                            <div>
                                 <span>
                                     <div className="badge">
                                         <img width="30px" src={require('../../../assets/image/badges/Boulderbadge.png')}/>
@@ -47,7 +47,7 @@ class PokemonHome extends Component {
                                         <img width="30px" src={require('../../../assets/image/badges/Mineralbadge.png')}/>
                                     </div>
                                 </span>
-                            </p>
+                            </div>
                         </div>
                         <div className="mb-5">
                             <div className="row" style={{ backgroundColor: "#2c2c2c" }}>

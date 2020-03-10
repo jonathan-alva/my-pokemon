@@ -17,9 +17,11 @@ class PokemonComponent extends Component{
                 <a className="link-url" href="#" style={{color:"#818181"}}>
                     <div className="img-container">
                         <img className="img" src={this.props.src}/>
-                        <p className="pokemon-number">{this.props.number}</p>
-                        <p className="pokemon-generation">{this.props.generation}</p>
-                        <p className="pokemon-type">{this.props.type}</p>
+                        <p className="pokemon-number">#{this.props.number}</p>
+                        <p className="pokemon-habitat">{this.props.habitat}</p>
+                        <p className="pokemon-name">{this.props.pokemon_name}</p>
+                        <p className="pokemon-type">{this.props.type1}</p>
+                        <p className="pokemon-type">{this.props.type2}</p>
                     </div>
                 </a>
             </Fragment>
