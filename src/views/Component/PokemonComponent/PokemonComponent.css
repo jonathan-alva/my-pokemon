@@ -1,0 +1,53 @@
+a.link-url:hover{
+    text-decoration: none;
+}
+
+.img{
+    width: 100%;
+}
+.img-container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.pokemon-number{
+    text-align: center;
+    margin-bottom: 0;
+    font-size:small;
+
+}
+.pokemon-generation{
+    text-align: center;
+    margin-bottom: 0;
+    font-size: medium;
+    font-weight: bold;
+}
+.pokemon-type{
+    text-align: center;
+    margin-bottom: auto;
+    font-size: medium;
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    .img-container{
+        width: 100%;
+    }
+    .pokemon-number{
+        text-align: center;
+        margin-bottom: 0;
+        font-size:x-small;
+    
+    }
+    .pokemon-generation{
+        text-align: center;
+        margin-bottom: 0;
+        font-size: xx-small;
+        font-weight: bold;
+    }
+    .pokemon-type{
+        text-align: center;
+        margin-bottom: auto;
+        font-size: xx-small;
+        font-weight: bold;
+    }
+}

@@ -29,72 +29,212 @@ class SectionLearning extends Component {
                     <tbody>
                         <tr>
                             <td className="w-25">
-                                Normal : 1
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Normal</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td className="w-25">
-                                Fighting : 2
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Fighting</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td className="w-25">
-                                Flying : 3
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Flying</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td className="w-25">
-                                Poison : 4
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Poison</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Ground : 1
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Ground</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Rock : 2
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Rock</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Bug : 3
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Bug</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Ghost : 4
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Ghost</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Steel : 1
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Steel</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Fire : 2
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Fire</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Water : 3
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Water</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Grass : 4
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Grass</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Electric : 1
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Electric</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Psychic : 2
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Psychic</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Ice : 3
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Ice</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Dragon : 4
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Dragon</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Dark : 1
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Dark</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Fairy : 2
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Fairy</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Unkown : 3
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Unknown</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                Shadow : 4
+                                <div className="row">
+                                    <div className="col">
+                                        <p>Shadow</p>
+                                    </div>
+                                    <div className="col">
+                                        1
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

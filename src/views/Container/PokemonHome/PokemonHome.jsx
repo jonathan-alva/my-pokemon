@@ -18,8 +18,36 @@ class PokemonHome extends Component {
                 <div className="container-fluid" style={{ backgroundColor:"#2c2c2c", paddingLeft: "0", paddingRight: "0" }}>
                     <div className="text-center">
                         <div className="mb-5 pb-5 pt-5" style={{backgroundColor: "#ebebeb"}}>
-                            {/* <img src={require("../../../static/image/user.png")} class="rounded-circle" alt="User"/> */}
+                            <div className="user-img mb-4"/>
                             <h1 className="orange">Jonathan Alva</h1>
+                            <p>
+                                <span>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Boulderbadge.png')}/>
+                                    </div>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Cascadebadge.png')}/>
+                                    </div>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Earthbadge.png')}/>
+                                    </div>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Fogbadge.png')}/>
+                                    </div>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Glacierbadge.png')}/>
+                                    </div>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Hivebadge.png')}/>
+                                    </div>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Marshbadge.png')}/>
+                                    </div>
+                                    <div className="badge">
+                                        <img width="30px" src={require('../../../assets/image/badges/Mineralbadge.png')}/>
+                                    </div>
+                                </span>
+                            </p>
                         </div>
                         <div className="mb-5">
                             <div className="row" style={{ backgroundColor: "#2c2c2c" }}>
