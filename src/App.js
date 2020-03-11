@@ -21,7 +21,7 @@ class App extends Component {
 			<BrowserRouter>
 				<React.Suspense fallback={loading()}>
 					<Switch>
-						<Route path="/pokemon" name="Pokemon" render={props => (<DefaultLayout {...props} />)}/>
+						<Route path="/" name="Pokemon" render={props => (<DefaultLayout {...props} />)}/>
 					</Switch>
 				</React.Suspense>
 			</BrowserRouter>
