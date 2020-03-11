@@ -14,23 +14,23 @@ class PokemonList extends Component {
         super(props);
 
         this.state = {
-            currentPage: 0,
-            pageSize: 20,
-            dataCount: 0,
-            pagesCount: 0,
-            pokemonType: [],
-            pokemonHabitat: [],
+            // currentPage: 0,
+            // pageSize: 20,
+            // dataCount: 0,
+            // pagesCount: 0,
+            // pokemonType: [],
+            // pokemonHabitat: [],
             
-            selectedOptionType1: null,
-            selectedOptionType2: null,
-            selectedOptionHabitat: null,
+            // selectedOptionType1: null,
+            // selectedOptionType2: null,
+            // selectedOptionHabitat: null,
 
-            optionType1:[],
-            optionType2:[],
-            optionHabitat:[],
+            // optionType1:[],
+            // optionType2:[],
+            // optionHabitat:[],
 
             currentData: [],
-            currentDetailsData: [],
+            // currentDetailsData: [],
         }
     }
     handleClick(e, index) {
@@ -43,60 +43,66 @@ class PokemonList extends Component {
     componentDidMount() {
         this.props.getInitalData();
         
-        API.getPokemonTypes().then(res=>{
-            this.setState({
-                pokemonType: res
-            },()=>{
-                let optionsPokemonType = [];
-                this.state.pokemonType.results.map(res=>{
-                    let data = {
-                        value: res.url, label: res.name
-                    }
-                    optionsPokemonType = [...optionsPokemonType, data];
-                    this.setState({
-                        optionType1: optionsPokemonType,
-                        optionType2: optionsPokemonType,
-                    })
-                })
+        // API.getPokemonTypes().then(res=>{
+        //     this.setState({
+        //         pokemonType: res
+        //     },()=>{
+        //         let optionsPokemonType = [];
+        //         this.state.pokemonType.results.map(res=>{
+        //             let data = {
+        //                 value: res.url, label: res.name
+        //             }
+        //             optionsPokemonType = [...optionsPokemonType, data];
+        //             this.setState({
+        //                 optionType1: optionsPokemonType,
+        //                 optionType2: optionsPokemonType,
+        //             })
+        //         })
                 
-            })
-        })
+        //     })
+        // })
 
-        API.getPokemonHabitats().then(res=>{
-            this.setState({
-                pokemonHabitat: res
-            },()=>{
-                let optionsPokemonHabitat = [];
-                this.state.pokemonHabitat.results.map(res=>{
-                    let data = {
-                        value: res.url, label: res.name
-                    }
-                    optionsPokemonHabitat = [...optionsPokemonHabitat, data];
-                    this.setState({
-                        optionHabitat: optionsPokemonHabitat
-                    })
-                })
-            })
-        })
-        API.getPokemonSpecies().then(res=>{
-            this.setState({
-                dataCount: res.count
-            },()=>{
-                this.setState({
-                    pagesCount: this.state.dataCount / this.state.pageSize
-                })
-            })
-        })
-        API.getPokemonSpeciesOffset(0).then(res=>{
+        // API.getPokemonHabitats().then(res=>{
+        //     this.setState({
+        //         pokemonHabitat: res
+        //     },()=>{
+        //         let optionsPokemonHabitat = [];
+        //         this.state.pokemonHabitat.results.map(res=>{
+        //             let data = {
+        //                 value: res.url, label: res.name
+        //             }
+        //             optionsPokemonHabitat = [...optionsPokemonHabitat, data];
+        //             this.setState({
+        //                 optionHabitat: optionsPokemonHabitat
+        //             })
+        //         })
+        //     })
+        // })
+        // API.getPokemonSpecies().then(res=>{
+        //     this.setState({
+        //         dataCount: res.count
+        //     },()=>{
+        //         this.setState({
+        //             pagesCount: this.state.dataCount / this.state.pageSize
+        //         })
+        //     })
+        // })
+        let page = this.props.match.params.page * 20;
+
+        // console.log(page)
+        API.getPokemonSpeciesOffset(page).then(res=>{
+            // console.log(res)
             res.results.map(data=>{
                 let pokemonData = [];
                 let currentData = [...this.state.currentData];
-                console.log(data)
+                // console.log(data)
                 let pokemonId = data.url.split('/')[6];
                 API.getPokemonSpeciesData(pokemonId).then(r=>{
-                    pokemonData['habitat'] = r.habitat;
+                    console.log(r)
+                    pokemonData['habitat'] = r.habitat['name'];
                 })
                 API.getPokemonData(pokemonId).then(r =>{
+                    console.log(r)
                     pokemonData['type'] = r.types;
                     pokemonData['form'] = r.sprites;
                     pokemonData['name'] = r.name;
@@ -113,31 +119,45 @@ class PokemonList extends Component {
         })
     }
 
-    handleChangePokemonType1 = selectedOptionType1 => {
-        this.setState({
-            selectedOptionType1
-        })
-        // console.log(selectedOptionType1)
-    };
+    // handleChangePokemonType1 = selectedOptionType1 => {
+    //     this.setState({
+    //         selectedOptionType1
+    //     })
+    //     // console.log(selectedOptionType1)
+    // };
 
-    handleChangePokemonType2 = selectedOptionType2 => {
-        this.setState({
-            selectedOptionType2
-        })
-        // console.log(selectedOptionType2)
-    };
+    // handleChangePokemonType2 = selectedOptionType2 => {
+    //     this.setState({
+    //         selectedOptionType2
+    //     })
+    //     // console.log(selectedOptionType2)
+    // };
 
-    handleChangePokemonHabitat = selectedOptionHabitat => {
-        this.setState({
-            selectedOptionHabitat
-        })
-        // console.log(selectedOptionHabitat)
-    };
+    // handleChangePokemonHabitat = selectedOptionHabitat => {
+    //     this.setState({
+    //         selectedOptionHabitat
+    //     })
+    //     // console.log(selectedOptionHabitat)
+    // };
 
     render() {
-        const { selectedOptionType1 } = this.state;
-        const { selectedOptionType2 } = this.state;
-        const { selectedOptionHabitat } = this.state;
+        const data = this.state.currentData;
+        let obj = [...data];
+        let element = [];
+        if(data.length != 0){
+            obj.sort((a,b)=>a.id - b.id);
+
+            obj.map((res,i)=>{
+                if(res!=[] && res.name != undefined && res.habitat!=undefined && res.id!=undefined && res.form.front_default!=undefined){
+                    element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
+                        <PokemonComponent pokemon_name={res.name} habitat={res.habitat} number={res.id} src={res.form.front_default} />
+                    </div>]
+                }
+            })
+        }
+        // const { selectedOptionType1 } = this.state;
+        // const { selectedOptionType2 } = this.state;
+        // const { selectedOptionHabitat } = this.state;
         return (
             <div style={{overflow:"hidden"}}>
                 <div className="container-fluid" style={{ backgroundColor: "#2c2c2c", paddingLeft: "0", paddingRight: "0" }}>
@@ -157,7 +177,7 @@ class PokemonList extends Component {
                     <div className="row">
                         <div className="col-lg-12 col-md-12 col-sm-x col-xs-x col-x px-5 py-5" style={{ backgroundColor: "#d1d1d1" }}>
                             <div className="container-fluid">
-                                <div className="row">
+                                {/* <div className="row">
                                     <div className="col-md-3">
                                         <Select
                                             value={selectedOptionType1}
@@ -185,18 +205,10 @@ class PokemonList extends Component {
                                             <button className="btn w-50">Reset</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="row mt-5">
                                     {
-                                        this.state.currentData.map((res) => {
-                                                return (
-                                                    <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
-                                                        <PokemonComponent pokemon_name={res.name?res.name:""} habitat={res.habitat.name?res.habitat.name:""} number={res.id?res.id:""} src={res.form.front_default?res.form.front_default:""} />
-                                                    </div>
-                                                )
-                                        }
-                                            
-                                        )
+                                        element
                                     }
                                 </div>
                                

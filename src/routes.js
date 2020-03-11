@@ -9,6 +9,6 @@ const routes = [
     { path: '/pokemon', exact: true, name: 'Pokemon Home', component: PokemonHome },
     { path: '/pokemon/owned', exact: true, name: 'Pokemon Owned', component: PokemonOwned },
     { path: '/pokemon/bag', exact: true, name: 'Pokemon Bag', component: PokemonBag },
-    { path: '/pokemon/list', exact: true, name: 'Pokemon List', component: PokemonList },
+    { path: '/pokemon/list/:page', exact: true, name: 'Pokemon List', component: PokemonList },
 ];
 export default routes;
