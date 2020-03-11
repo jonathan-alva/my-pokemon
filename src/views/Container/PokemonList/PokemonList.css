@@ -9,7 +9,7 @@
 #pokemon_list_header {
     background-image: url('../../../assets/image/pokemon-list-bg.jpg');
     height: 100%;
-    opacity: 0.5;
+    opacity: 0.8;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
