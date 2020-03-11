@@ -20,8 +20,14 @@ class PokemonComponent extends Component{
                         <p className="pokemon-number">#{this.props.number}</p>
                         <p className="pokemon-habitat">{this.props.habitat}</p>
                         <p className="pokemon-name">{this.props.pokemon_name}</p>
-                        <p className="pokemon-type">{this.props.type1}</p>
-                        <p className="pokemon-type">{this.props.type2}</p>
+                        <div className="row">
+                            <div className="col">
+                                <p className="pokemon-type">{this.props.type1}</p>
+                            </div>
+                            <div className="col">
+                                <p className="pokemon-type">{this.props.type2}</p>
+                            </div>
+                        </div>
                     </div>
                 </a>
             </Fragment>

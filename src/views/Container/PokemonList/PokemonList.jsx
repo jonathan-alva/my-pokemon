@@ -102,8 +102,15 @@ class PokemonList extends Component {
                     pokemonData['habitat'] = r.habitat['name'];
                 })
                 API.getPokemonData(pokemonId).then(r =>{
-                    console.log(r)
-                    pokemonData['type'] = r.types;
+                    let pokemonTypeList = r.types;
+                    if(pokemonTypeList.length == 1){
+                        pokemonData['type1'] = pokemonTypeList[0].type.name;
+                        pokemonData['type2'] = "";
+                    }
+                    else{
+                        pokemonData['type1'] = pokemonTypeList[0].type.name;
+                        pokemonData['type2'] = pokemonTypeList[1].type.name;
+                    }
                     pokemonData['form'] = r.sprites;
                     pokemonData['name'] = r.name;
                     pokemonData['id'] = pokemonId;
@@ -150,7 +157,7 @@ class PokemonList extends Component {
             obj.map((res,i)=>{
                 if(res!=[] && res.name != undefined && res.habitat!=undefined && res.id!=undefined && res.form.front_default!=undefined){
                     element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
-                        <PokemonComponent pokemon_name={res.name} habitat={res.habitat} number={res.id} src={res.form.front_default} />
+                        <PokemonComponent pokemon_name={res.name} habitat={res.habitat} number={res.id} src={res.form.front_default} type1={res.type1} type2={res.type2} />
                     </div>]
                 }
             })
