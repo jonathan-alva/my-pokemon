@@ -17,22 +17,26 @@
     padding-top: 20%;
     padding-bottom: 20%;
 }
-
+.content_pokemon_list_header{
+    width: 50%;
+}
 .page-link {
     background-color: transparent;
-    border: none;
-    color: white;
+    color: #818181;
     font-family: 'Segoe UI Bold';
     font-size: medium;
 }
 
 li.page-item.active .page-link {
-    background-color: transparent;
-    color: #e95e1e;
+    background-color: #818181;
+    color: #ffffff;
+    border: none;
 }
 
-@media (max-width: 767px) {
-
+@media (max-width: 768px) {
+    .content_pokemon_list_header{
+        width: 100%;
+    }
     #pokemon_list_header {
         padding-top: 40%;
     }
