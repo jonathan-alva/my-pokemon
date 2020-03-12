@@ -27,6 +27,7 @@ class PokemonOwned extends Component {
                 let pokemon_id = data.pokemon_id;
                 let pokemon_nickname = data.nickname;
                 pokemonData['nickname'] = pokemon_nickname;
+                pokemonData['data_id'] = data.id;
                 API.getPokemonSpeciesData(pokemon_id).then(r=>{
                     let pokemonColor = r.color.name;
                     if(pokemonColor == 'black'){
@@ -103,12 +104,12 @@ class PokemonOwned extends Component {
         let obj = [...data];
         let element = [];
         if(data.length != 0){
-            obj.sort((a,b)=>a.id - b.id);
+            obj.sort((a,b)=>a.data_id - b.data_id);
 
             obj.map((res,i)=>{
                 if(res!=[] && res.name != undefined && res.id!=undefined && res.form.front_default!=undefined){
                     element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
-                        <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../owned/detail/"/>
+                        <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../owned/detail/"/>
                     </div>]
                 }
             })

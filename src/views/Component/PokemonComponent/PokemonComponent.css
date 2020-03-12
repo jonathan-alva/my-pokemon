@@ -20,12 +20,12 @@ a.link-url:hover{
 .pokemon-name{
     margin-bottom: 0;
     font-size: large;
-    font-weight: bold;
+    font-weight: bolder;
 }
-.pokemon-name{
+.pokemon-nickname{
     margin-bottom: 0;
     font-size: medium;
-    font-weight: bold;
+    font-weight: bold
 }
 .pokemon-type{
     margin-bottom: auto;

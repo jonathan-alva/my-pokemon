@@ -26,7 +26,6 @@ class PokemonOwnedDetail extends Component {
             },
             pokemon_species_data: {
                 color: [],
-                evolution_chain: [],
                 growth_rate: [],
                 base_happiness: ""
             },
@@ -36,16 +35,20 @@ class PokemonOwnedDetail extends Component {
             pagesCountMoves: 0,
             prevDetail: "",
             nextDetail: "",
-            prevId: 0,
-            nextId: 0
+            prevId: "",
+            nextId: "",
+            prevUrl: "",
+            nextUrl: ""
         }
+        this.handleReleaseButton = this.handleReleaseButton.bind(this);
     }
-    componentDidMount() {
+    async componentDidMount() {
         this.props.getInitalData();
         let id = this.props.match.params.id;
-        API.getPokemonOwnedID(id).then(res=>{
+        await API.getPokemonOwnedID(id).then(res=>{
             let pokemon_data = {...this.state.pokemon_data};
             pokemon_data['nickname'] = res[0].nickname;
+            pokemon_data['id'] = id;
             let pokemon_id = res[0].pokemon_id;
             API.getPokemonData(pokemon_id).then(res=>{
                 pokemon_data['front_default'] = res.sprites.front_default
@@ -101,41 +104,63 @@ class PokemonOwnedDetail extends Component {
                 })
             })
             API.getPokemonSpeciesData(pokemon_id).then(res=>{
-                
-                API.getPokemonSpecies().then(res=>{
-                    let nextId = parseInt(pokemon_id)+1
-                    let prevId = parseInt(pokemon_id)-1
-                    if(pokemon_id == 1){
-                        API.getPokemonData(nextId).then(res=>{
-                            this.setState({
-                                nextDetail:res.sprites.front_default,
-                                nextId: nextId
-                            })
+                let arrOfPokemonOwnedId = []
+                API.getPokemonOwned().then(res=>{
+                    res.map(data=>{
+                        arrOfPokemonOwnedId = [...arrOfPokemonOwnedId, data.id]
+                    })
+                    let indexCurrentId = arrOfPokemonOwnedId.indexOf(id);
+                    let nextId = parseInt(arrOfPokemonOwnedId[indexCurrentId+1])
+                    let prevId = parseInt(arrOfPokemonOwnedId[indexCurrentId-1])
+                    if(indexCurrentId == 0){
+                        API.getPokemonOwnedID(nextId).then(res=>{
+                            let pokemonNickname = res[0].nickname
+                            API.getPokemonData(res[0].pokemon_id).then(res=>{
+                                this.setState({
+                                    nextDetail:res.sprites.front_default,
+                                    nextId: pokemonNickname,
+                                    nextUrl: nextId
+                                })
+                            })                            
                         })
                     }
-                    else if(pokemon_id == res.count){
-                        API.getPokemonData(prevId).then(res=>{
-                            this.setState({
-                                prevDetail: res.sprites.front_default,
-                                prevId: prevId
-                            })
+                    else if(indexCurrentId == indexCurrentId.length-1){
+                        API.getPokemonOwnedID(prevId).then(res=>{
+                            let pokemonNickname = res[0].nickname
+                            API.getPokemonData(res[0].pokemon_id).then(res=>{
+                                this.setState({
+                                    prevDetail: res.sprites.front_default,
+                                    prevId: pokemonNickname,
+                                    prevUrl: prevId,
+                                })
+                            })                            
                         })
                     }
                     else{
-                        API.getPokemonData(nextId).then(res=>{
-                            this.setState({
-                                nextDetail:res.sprites.front_default,
-                                nextId: nextId
+                        API.getPokemonOwnedID(nextId).then(res=>{
+                            let pokemonNickname = res[0].nickname
+                            API.getPokemonData(res[0].pokemon_id).then(res=>{
+                                console.log(pokemonNickname)
+                                this.setState({
+                                    nextDetail:res.sprites.front_default,
+                                    nextId: pokemonNickname,
+                                    nextUrl: nextId
+                                })
                             })
                         })
-                        API.getPokemonData(prevId).then(res=>{
-                            this.setState({
-                                prevDetail:res.sprites.front_default,
-                                prevId: prevId
+                        API.getPokemonOwnedID(prevId).then(res=>{
+                            let pokemonNickname = res[0].nickname
+                            API.getPokemonData(res[0].pokemon_id).then(res=>{
+                                this.setState({
+                                    prevDetail:res.sprites.front_default,
+                                    prevId: pokemonNickname,
+                                    prevUrl: prevId,
+                                })
                             })
                         })
                     }
                 })
+                
                 
                 let pokemon_species_data = {...this.state.pokemon_species_data};
                 let pokemonColor = res.color.name;
@@ -179,7 +204,6 @@ class PokemonOwnedDetail extends Component {
                     pokemon_species_data['color'] = "#FFCE4B";
                     pokemon_species_data['textColor'] = "white";
                 }
-                pokemon_species_data['evolution_chain'] = res.evolution_chain;
                 pokemon_species_data['growth_rate'] = res.growth_rate;
                 pokemon_species_data['base_happiness'] = res.base_happiness;
                 this.setState({
@@ -200,12 +224,15 @@ class PokemonOwnedDetail extends Component {
         });
     }
     handleReleaseButton(){
-        console.log('asd')
+        console.log(this.state.pokemon_data)
         if(window.confirm(`Are you sure want to release ${this.state.pokemon_data.nickname} ?`)){
-            alert(`Bye ${this.state.pokemon_data.nickname}~`);
+            
             API.deletePokemon(this.props.match.params.id).then(res=>{
-                this.props.history.push(`/owned`);
+                console.log(res)
+                alert(`Bye ${this.state.pokemon_data.nickname}~`);
+                window.location = '/owned';
             })
+            
         }
        
         
@@ -393,26 +420,36 @@ class PokemonOwnedDetail extends Component {
                             <div className="col-lg-12 col-md-12 col-sm-12 p-5">
                                 <div className="w-10 float-left">
                                     <div id="prevDetail">
-                                        <a href={`../detail/${this.state.prevId}`}>
-                                            {
-                                                <div>
-                                                    <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} />
-                                                    <p className="text-center">#{this.state.prevId}</p>
-                                                </div>
-                                            }
-                                        </a>
+                                        {
+                                            this.state.prevUrl != ""?
+                                            (
+                                            <a href={`../detail/${this.state.prevUrl}`}>
+                                                {
+                                                    <div>
+                                                        <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} />
+                                                        <p className="text-center">{this.state.prevId}</p>
+                                                    </div>
+                                                }
+                                            </a>
+                                            ):<div/>
+                                        }
                                     </div>
                                 </div>
                                 <div className="w-10 float-right">
                                     <div id="nextDetail">
-                                        <a href={`../detail/${this.state.nextId}`}>
-                                            {   
-                                                <div>
-                                                    <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} />
-                                                    <p className="text-center">#{this.state.nextId}</p>
-                                                </div>
-                                            }
-                                        </a>
+                                        {
+                                            this.state.nextUrl != ""?
+                                            (
+                                                <a href={`../detail/${this.state.nextUrl}`}>
+                                                    {   
+                                                        <div>
+                                                            <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} />
+                                                            <p className="text-center">{this.state.nextId}</p>
+                                                        </div>
+                                                    }
+                                                </a>
+                                            ): <div/>
+                                        }
                                     </div>
                                 </div>
                             </div>

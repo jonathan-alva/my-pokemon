@@ -137,6 +137,7 @@ class PokemonList extends Component {
                     pokemonData['form'] = r.sprites;
                     pokemonData['name'] = r.name.charAt(0).toUpperCase() + r.name.slice(1);
                     pokemonData['id'] = pokemonId;
+                    pokemonData['data_id'] = pokemonId
                     currentData = [...this.state.currentData, pokemonData];
                     this.setState({
                         currentData: currentData
@@ -156,7 +157,7 @@ class PokemonList extends Component {
             obj.map((res,i)=>{
                 if(res!=[] && res.name != undefined && res.id!=undefined && res.form.front_default!=undefined){
                     element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
-                        <PokemonComponent pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../detail/"/>
+                        <PokemonComponent pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} data_id={res.data_id} number={res.id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../detail/"/>
                     </div>]
                 }
             })

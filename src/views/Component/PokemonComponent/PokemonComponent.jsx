@@ -14,13 +14,14 @@ class PokemonComponent extends Component{
     render(){
         return(
             <Fragment>
-                <a className="link-url" href={`${this.props.url}${this.props.number}`} style={{color:this.props.pokemon_text_color}}>
+                <a className="link-url" href={`${this.props.url}${this.props.data_id}`} style={{color:this.props.pokemon_text_color}}>
                     <div className="img-container" style={{ backgroundColor:this.props.pokemon_color}}>
                         <div className="row" style={{margin:0}}>
                             <div className="col-12 col-xs-6 col-md-6 ">
                                 <div className="position-relative h-100">
                                     <div className="pt-1 pr-1">
                                         <p className="pokemon-name">{this.props.pokemon_name}</p>
+                                        <p className="pokemon-nickname">{this.props.pokemon_nickname}</p>
                                     </div>
                                     <div className="pokemon-type-box">
                                         <p className="pokemon-type">{this.props.type1}</p>

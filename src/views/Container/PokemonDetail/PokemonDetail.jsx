@@ -26,7 +26,6 @@ class PokemonDetail extends Component {
             },
             pokemon_species_data: {
                 color: [],
-                evolution_chain: [],
                 growth_rate: [],
                 base_happiness: ""
             },
@@ -37,7 +36,9 @@ class PokemonDetail extends Component {
             prevDetail: "",
             nextDetail: "",
             prevId: "",
-            nextId: ""
+            nextId: "",
+            prevUrl: "",
+            nextUrl: ""
         }
     }
     async componentDidMount() {
@@ -107,7 +108,8 @@ class PokemonDetail extends Component {
                     API.getPokemonData(nextId).then(res=>{
                         this.setState({
                             nextDetail:res.sprites.front_default,
-                            nextId: "#"+nextId
+                            nextId: "#"+nextId,
+                            nextUrl: nextId
                         })
                     })
                 }
@@ -115,7 +117,8 @@ class PokemonDetail extends Component {
                     API.getPokemonData(prevId).then(res=>{
                         this.setState({
                             prevDetail: res.sprites.front_default,
-                            prevId: "#"+prevId
+                            prevUrl: prevId,
+                            prevId: "#"+prevId,
                         })
                     })
                 }
@@ -123,13 +126,15 @@ class PokemonDetail extends Component {
                     API.getPokemonData(nextId).then(res=>{
                         this.setState({
                             nextDetail:res.sprites.front_default,
-                            nextId: "#"+nextId
+                            nextId: nextId,
+                            nextUrl: "#"+nextId
                         })
                     })
                     API.getPokemonData(prevId).then(res=>{
                         this.setState({
                             prevDetail:res.sprites.front_default,
-                            prevId: "#"+prevId
+                            prevUrl: prevId,
+                            prevId: "#"+prevId,
                         })
                     })
                 }
@@ -177,7 +182,6 @@ class PokemonDetail extends Component {
                 pokemon_species_data['color'] = "#FFCE4B";
                 pokemon_species_data['textColor'] = "white";
             }
-            pokemon_species_data['evolution_chain'] = res.evolution_chain;
             pokemon_species_data['growth_rate'] = res.growth_rate;
             pokemon_species_data['base_happiness'] = res.base_happiness;
             this.setState({
@@ -382,26 +386,38 @@ class PokemonDetail extends Component {
                             <div className="col-lg-12 col-md-12 col-sm-12 p-5">
                                 <div className="w-10 float-left">
                                     <div id="prevDetail">
-                                        <a href={`../detail/${this.state.prevId}`}>
-                                            {
-                                                <div>
-                                                    <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} />
-                                                    <p className="text-center">{this.state.prevId}</p>
-                                                </div>
-                                            }
-                                        </a>
+                                        {
+                                            this.state.prevUrl != ""?
+                                            (
+                                            <a href={`../detail/${this.state.prevUrl}`}>
+                                                {
+                                                    <div>
+                                                        <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} />
+                                                        <p className="text-center">{this.state.prevId}</p>
+                                                    </div>
+                                                }
+                                            </a>
+                                            ):<div/>
+                                        }
+                                        
                                     </div>
                                 </div>
                                 <div className="w-10 float-right">
                                     <div id="nextDetail">
-                                        <a href={`../detail/${this.state.nextId}`}>
-                                            {   
-                                                <div>
-                                                    <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} />
-                                                    <p className="text-center">{this.state.nextId}</p>
-                                                </div>
-                                            }
-                                        </a>
+                                        {
+                                            this.state.nextUrl != ""?
+                                            (
+                                                <a href={`../detail/${this.state.nextUrl}`}>
+                                                    {   
+                                                        <div>
+                                                            <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} />
+                                                            <p className="text-center">{this.state.nextId}</p>
+                                                        </div>
+                                                    }
+                                                </a>
+                                            ): <div/>
+                                        }
+                                        
                                     </div>
                                 </div>
                             </div>
