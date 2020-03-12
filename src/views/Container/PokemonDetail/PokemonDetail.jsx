@@ -21,7 +21,9 @@ class PokemonDetail extends Component {
                 abilities:[], // name, effect, short effect
                 moves: [], // name, pp
                 stats: [], // base stat, effort, stat: name
-                types: [] // name
+                types: [], // name
+                abilities_data: [],
+                moves_data: []
             },
             pokemon_species_data: {
                 color: [],
@@ -49,7 +51,44 @@ class PokemonDetail extends Component {
             this.setState({
                 pokemon_data: pokemon_data
             },()=>{
-                // console.log(this.state.pokemon_data)
+                let pokemon_abilities = [...this.state.pokemon_data.abilities];
+                let pokemon_moves = [...this.state.pokemon_data.moves];
+                let ability_list = [];
+                let move_list = [];
+                pokemon_abilities.map(res=>{
+                    let ability_id = res.ability.url.split('/')[6];
+                    let data = []
+                    API.getAbilityData(ability_id).then(res=>{
+                        data['short_effect'] = res.effect_entries[0].short_effect;
+                        res.names.map(res=>{
+                            if(res.language.name == 'en'){
+                                data['name'] = res.name;
+                            }
+                        });
+                        ability_list = [...ability_list, data];
+                        this.setState({
+                            abilities_data:ability_list
+                        })
+                    })
+                    
+                })
+                pokemon_moves.map(res=>{
+                    let move_id = res.move.url.split('/')[6];
+                    let data = [];
+                    API.getMoveData(move_id).then(res=>{
+                        data['pp'] = res.pp;
+                        res.names.map(res=>{
+                            if(res.language.name == 'en'){
+                                data['name'] = res.name;
+                            }
+                        });
+                        move_list = [...move_list, data];
+                        this.setState({
+                            moves_data:move_list
+                        })
+                    })
+                    
+                })
             })
         })
         await API.getPokemonSpeciesData(pokemon_id).then(res=>{
@@ -63,17 +102,17 @@ class PokemonDetail extends Component {
             },()=>{
                 // console.log(this.state.pokemon_species_data)
             })
+                this.setState({
+                isLoad: true
+            })
         })
-        this.setState({
-            isLoad: true
-        })
+        
     }
 
     render() {
-        // console.log(this.state.isLoad)
-        if(this.state.isLoad == true){
-            console.log(this.state.pokemon_data)
-            console.log(this.state.pokemon_species_data)
+        if(this.state.isLoad == true && this.state.abilities_data != undefined && this.state.moves_data != undefined){
+            // console.log(this.state.pokemon_data)
+            // console.log(this.state.pokemon_species_data)
             let biggestStatNumber = 0;
             this.state.pokemon_data.stats.map(res=>{
                 if(res.base_stat > biggestStatNumber){
@@ -173,7 +212,11 @@ class PokemonDetail extends Component {
                                             fontSizeTitle="2"
                                         />
                                         <ul className="main_list">
-                                            
+                                            {
+                                                this.state.abilities_data.map((res,i)=>
+                                                    <li key={i}><span style={{ fontWeight: "bold" }}>{res.name}</span> - {res.short_effect}.</li>
+                                                )
+                                            }
                                         </ul>
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 second_section">
@@ -183,7 +226,20 @@ class PokemonDetail extends Component {
                                             fontSizeTitle="2"
                                         />
                                         <ul className="main_list">
-                                            
+                                            {
+                                                this.state.moves_data.map((res,i)=>
+                                                    <li key={i}>
+                                                        <div className="row">
+                                                            <div className="col">
+                                                                <span style={{ fontWeight: "bold" }}>{res.name}</span>
+                                                            </div>
+                                                            <div className="col">
+                                                                <span>Charge : {res.pp}</span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            }
                                         </ul>
                                     </div>
                                 </div>
