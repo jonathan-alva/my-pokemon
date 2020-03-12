@@ -21,7 +21,12 @@ class PokemonComponent extends Component{
                                 <div className="position-relative h-100">
                                     <div className="pt-1 pr-1">
                                         <p className="pokemon-name">{this.props.pokemon_name}</p>
-                                        <p className="pokemon-nickname">{this.props.pokemon_nickname}</p>
+                                        {
+                                            this.props.pokemon_nickname !=""?
+                                            <p className="pokemon-nickname">{this.props.pokemon_nickname}</p>:
+                                            <p className="pokemon-nickname">{this.props.owned_total} Owned</p>
+                                        }
+                                        {/* <p className="pokemon-nickname">{this.props.pokemon_nickname}</p> */}
                                     </div>
                                     <div className="pokemon-type-box">
                                         <p className="pokemon-type">{this.props.type1}</p>

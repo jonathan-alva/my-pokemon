@@ -22,7 +22,8 @@ class PokemonOwnedDetail extends Component {
                 stats: [], // base stat, effort, stat: name
                 types: [], // name
                 abilities_data: [],
-                moves_data: []
+                moves_data: [],
+                stats_data: []
             },
             pokemon_species_data: {
                 color: [],
@@ -66,8 +67,10 @@ class PokemonOwnedDetail extends Component {
                 },()=>{
                     let pokemon_abilities = [...this.state.pokemon_data.abilities];
                     let pokemon_moves = [...this.state.pokemon_data.moves];
+                    let pokemon_stats = [...this.state.pokemon_data.stats];
                     let ability_list = [];
                     let move_list = [];
+                    let stat_list = [];
                     pokemon_abilities.map(res=>{
                         let ability_id = res.ability.url.split('/')[6];
                         let data = []
@@ -98,6 +101,22 @@ class PokemonOwnedDetail extends Component {
                             move_list = [...move_list, data];
                             this.setState({
                                 moves_data:move_list
+                            })
+                        })
+                    })
+                    pokemon_stats.map(res=>{
+                        let state_id = res.stat.url.split('/')[6];
+                        let data = [];
+                        data['base_stat'] = res.base_stat;
+                        API.getStatData(state_id).then(res=>{
+                            res.names.map(res=>{
+                                if(res.language.name == 'en'){
+                                    data['name'] = res.name;
+                                }
+                            });
+                            stat_list = [...stat_list, data];
+                            this.setState({
+                                stats_data:stat_list
                             })
                         })
                     })
@@ -239,9 +258,9 @@ class PokemonOwnedDetail extends Component {
     }
     render() {
         const { currentPage } = this.state;
-        if(this.state.isLoad == true && this.state.abilities_data != undefined && this.state.moves_data != undefined){
+        if(this.state.isLoad == true && this.state.abilities_data != undefined && this.state.moves_data != undefined && this.state.stats_data != undefined){
             let biggestStatNumber = 0;
-            this.state.pokemon_data.stats.map(res=>{
+            this.state.stats_data.map(res=>{
                 if(res.base_stat > biggestStatNumber){
                     biggestStatNumber = res.base_stat
                 }
@@ -290,10 +309,10 @@ class PokemonOwnedDetail extends Component {
                                             <h4 style={{color:"white"}}>Base Stat</h4>
                                             <hr className="separator" />
                                                 {
-                                                    this.state.pokemon_data.stats.map((res,i)=>
+                                                    this.state.stats_data.map((res,i)=>
                                                         <div className="row" key={i}>
                                                             <div className="col">
-                                                                <p className="fix-line-height-text" style={{color:"white"}}>{res.stat.name.charAt(0).toUpperCase() + res.stat.name.slice(1)}</p>
+                                                                <p className="fix-line-height-text" style={{color:"white"}}>{res.name}</p>
                                                             </div>
                                                             <div className="col">
                                                                 <div className="progress">
