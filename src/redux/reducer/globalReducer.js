@@ -28,7 +28,7 @@ export const getInitalData = () => async dispatch => {
         dispatch({ type: ActionType.GET_POKEMON_TYPES, pokemonType });
         
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 

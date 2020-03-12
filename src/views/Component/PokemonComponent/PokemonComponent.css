@@ -22,6 +22,11 @@ a.link-url:hover{
     font-size: large;
     font-weight: bold;
 }
+.pokemon-name{
+    margin-bottom: 0;
+    font-size: medium;
+    font-weight: bold;
+}
 .pokemon-type{
     margin-bottom: auto;
     font-size: medium;

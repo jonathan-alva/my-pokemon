@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { Pagination, PaginationItem, PaginationLink, Button } from 'reactstrap';
-import './PokemonDetail.css';
+import './PokemonOwnedDetail.css';
 import { connect } from 'react-redux';
 import { getInitalData } from "../../../redux/reducer/globalReducer";
 import TitleComponent from '../../Component/TitleComponent/TitleComponent';
 import DescriptionComponent from '../../Component/DescriptionComponent/DescriptionComponent';
 import API from "../../../service";
 
-class PokemonDetail extends Component {
+class PokemonOwnedDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,157 +36,161 @@ class PokemonDetail extends Component {
             pagesCountMoves: 0,
             prevDetail: "",
             nextDetail: "",
-            prevId: "",
-            nextId: ""
+            prevId: 0,
+            nextId: 0
         }
     }
-    async componentDidMount() {
+    componentDidMount() {
         this.props.getInitalData();
-        let pokemon_id = this.props.match.params.id;
-        await API.getPokemonData(pokemon_id).then(res=>{
+        let id = this.props.match.params.id;
+        API.getPokemonOwnedID(id).then(res=>{
             let pokemon_data = {...this.state.pokemon_data};
-            pokemon_data['front_default'] = res.sprites.front_default
-            pokemon_data['pokemon_name'] = res.name.charAt(0).toUpperCase() + res.name.slice(1);
-            pokemon_data['pokemon_height'] = res.height;
-            pokemon_data['pokemon_width'] = res.width;
-            pokemon_data['abilities'] = res.abilities;
-            pokemon_data['moves'] = res.moves;
-            pokemon_data['stats'] = res.stats;
-            pokemon_data['types'] = res.types;
-            pokemon_data['pokemon_id'] = pokemon_id;
-            // pokemon_data['pagesCountMoves'] = Math.ceil(res.moves.length/this.state.pageSize)
-            this.setState({
-                pokemon_data: pokemon_data,
-                pagesCountMoves: Math.ceil(res.moves.length/this.state.pageSize)
-            },()=>{
-                let pokemon_abilities = [...this.state.pokemon_data.abilities];
-                let pokemon_moves = [...this.state.pokemon_data.moves];
-                let ability_list = [];
-                let move_list = [];
-                pokemon_abilities.map(res=>{
-                    let ability_id = res.ability.url.split('/')[6];
-                    let data = []
-                    API.getAbilityData(ability_id).then(res=>{
-                        data['short_effect'] = res.effect_entries[0].short_effect;
-                        res.names.map(res=>{
-                            if(res.language.name == 'en'){
-                                data['name'] = res.name;
-                            }
-                        });
-                        ability_list = [...ability_list, data];
-                        this.setState({
-                            abilities_data:ability_list
+            pokemon_data['nickname'] = res[0].nickname;
+            let pokemon_id = res[0].pokemon_id;
+            API.getPokemonData(pokemon_id).then(res=>{
+                pokemon_data['front_default'] = res.sprites.front_default
+                pokemon_data['pokemon_name'] = res.name.charAt(0).toUpperCase() + res.name.slice(1);
+                pokemon_data['pokemon_height'] = res.height;
+                pokemon_data['pokemon_width'] = res.width;
+                pokemon_data['abilities'] = res.abilities;
+                pokemon_data['moves'] = res.moves;
+                pokemon_data['stats'] = res.stats;
+                pokemon_data['types'] = res.types;
+                pokemon_data['pokemon_id'] = pokemon_id;
+                this.setState({
+                    pokemon_data: pokemon_data,
+                    pagesCountMoves: Math.ceil(res.moves.length/this.state.pageSize)
+                },()=>{
+                    let pokemon_abilities = [...this.state.pokemon_data.abilities];
+                    let pokemon_moves = [...this.state.pokemon_data.moves];
+                    let ability_list = [];
+                    let move_list = [];
+                    pokemon_abilities.map(res=>{
+                        let ability_id = res.ability.url.split('/')[6];
+                        let data = []
+                        API.getAbilityData(ability_id).then(res=>{
+                            data['short_effect'] = res.effect_entries[0].short_effect;
+                            res.names.map(res=>{
+                                if(res.language.name == 'en'){
+                                    data['name'] = res.name;
+                                }
+                            });
+                            ability_list = [...ability_list, data];
+                            this.setState({
+                                abilities_data:ability_list
+                            })
+                        })
+                        
+                    })
+                    pokemon_moves.map(res=>{
+                        let move_id = res.move.url.split('/')[6];
+                        let data = [];
+                        API.getMoveData(move_id).then(res=>{
+                            data['pp'] = res.pp;
+                            res.names.map(res=>{
+                                if(res.language.name == 'en'){
+                                    data['name'] = res.name;
+                                }
+                            });
+                            move_list = [...move_list, data];
+                            this.setState({
+                                moves_data:move_list
+                            })
                         })
                     })
-                    
                 })
-                pokemon_moves.map(res=>{
-                    let move_id = res.move.url.split('/')[6];
-                    let data = [];
-                    API.getMoveData(move_id).then(res=>{
-                        data['pp'] = res.pp;
-                        res.names.map(res=>{
-                            if(res.language.name == 'en'){
-                                data['name'] = res.name;
-                            }
-                        });
-                        move_list = [...move_list, data];
-                        this.setState({
-                            moves_data:move_list
+            })
+            API.getPokemonSpeciesData(pokemon_id).then(res=>{
+                
+                API.getPokemonSpecies().then(res=>{
+                    let nextId = parseInt(pokemon_id)+1
+                    let prevId = parseInt(pokemon_id)-1
+                    if(pokemon_id == 1){
+                        API.getPokemonData(nextId).then(res=>{
+                            this.setState({
+                                nextDetail:res.sprites.front_default,
+                                nextId: nextId
+                            })
                         })
-                    })
+                    }
+                    else if(pokemon_id == res.count){
+                        API.getPokemonData(prevId).then(res=>{
+                            this.setState({
+                                prevDetail: res.sprites.front_default,
+                                prevId: prevId
+                            })
+                        })
+                    }
+                    else{
+                        API.getPokemonData(nextId).then(res=>{
+                            this.setState({
+                                nextDetail:res.sprites.front_default,
+                                nextId: nextId
+                            })
+                        })
+                        API.getPokemonData(prevId).then(res=>{
+                            this.setState({
+                                prevDetail:res.sprites.front_default,
+                                prevId: prevId
+                            })
+                        })
+                    }
+                })
+                
+                let pokemon_species_data = {...this.state.pokemon_species_data};
+                let pokemonColor = res.color.name;
+                if(pokemonColor == 'black'){
+                    pokemon_species_data['color'] = "#303943";
+                    pokemon_species_data['textColor'] = "white";
+                }
+                else if(pokemonColor == 'blue'){
+                    pokemon_species_data['color'] = "#58abf6";
+                    pokemon_species_data['textColor'] = "white";
+                }
+                else if(pokemonColor == 'brown'){
+                    pokemon_species_data['color'] = "#CA8179";
+                    pokemon_species_data['textColor'] = "white";
+                }
+                else if(pokemonColor == 'gray'){
+                    pokemon_species_data['color'] = "#F5F5F5";
+                    pokemon_species_data['textColor'] = "#818181";
+                }
+                else if(pokemonColor == 'green'){
+                    pokemon_species_data['color'] = "#2CDAB1";
+                    pokemon_species_data['textColor'] = "white";
+                }
+                else if(pokemonColor == 'pink'){
+                    pokemon_species_data['color'] = "#FFB6C1";
+                    pokemon_species_data['textColor'] = "#818181";
+                }
+                else if(pokemonColor == 'purple'){
+                    pokemon_species_data['color'] = "#9F5BBA";
+                    pokemon_species_data['textColor'] = "white";
+                }
+                else if(pokemonColor == 'red'){
+                    pokemon_species_data['color'] = "#F7786B";
+                    pokemon_species_data['textColor'] = "white";
+                }
+                else if(pokemonColor == 'white'){
+                    pokemon_species_data['color'] = "white";
+                    pokemon_species_data['textColor'] = "#818181";
+                }
+                else if(pokemonColor == 'yellow'){
+                    pokemon_species_data['color'] = "#FFCE4B";
+                    pokemon_species_data['textColor'] = "white";
+                }
+                pokemon_species_data['evolution_chain'] = res.evolution_chain;
+                pokemon_species_data['growth_rate'] = res.growth_rate;
+                pokemon_species_data['base_happiness'] = res.base_happiness;
+                this.setState({
+                    pokemon_species_data: pokemon_species_data
+                })
+                this.setState({
+                    isLoad: true
                 })
             })
         })
-        await API.getPokemonSpeciesData(pokemon_id).then(res=>{
-            
-            API.getPokemonSpecies().then(res=>{
-                let nextId = parseInt(pokemon_id)+1
-                let prevId = parseInt(pokemon_id)-1
-                if(pokemon_id == 1){
-                    API.getPokemonData(nextId).then(res=>{
-                        this.setState({
-                            nextDetail:res.sprites.front_default,
-                            nextId: "#"+nextId
-                        })
-                    })
-                }
-                else if(pokemon_id == res.count){
-                    API.getPokemonData(prevId).then(res=>{
-                        this.setState({
-                            prevDetail: res.sprites.front_default,
-                            prevId: "#"+prevId
-                        })
-                    })
-                }
-                else{
-                    API.getPokemonData(nextId).then(res=>{
-                        this.setState({
-                            nextDetail:res.sprites.front_default,
-                            nextId: "#"+nextId
-                        })
-                    })
-                    API.getPokemonData(prevId).then(res=>{
-                        this.setState({
-                            prevDetail:res.sprites.front_default,
-                            prevId: "#"+prevId
-                        })
-                    })
-                }
-            })
-            
-            let pokemon_species_data = {...this.state.pokemon_species_data};
-            let pokemonColor = res.color.name;
-            if(pokemonColor == 'black'){
-                pokemon_species_data['color'] = "#303943";
-                pokemon_species_data['textColor'] = "white";
-            }
-            else if(pokemonColor == 'blue'){
-                pokemon_species_data['color'] = "#58abf6";
-                pokemon_species_data['textColor'] = "white";
-            }
-            else if(pokemonColor == 'brown'){
-                pokemon_species_data['color'] = "#CA8179";
-                pokemon_species_data['textColor'] = "white";
-            }
-            else if(pokemonColor == 'gray'){
-                pokemon_species_data['color'] = "#F5F5F5";
-                pokemon_species_data['textColor'] = "#818181";
-            }
-            else if(pokemonColor == 'green'){
-                pokemon_species_data['color'] = "#2CDAB1";
-                pokemon_species_data['textColor'] = "white";
-            }
-            else if(pokemonColor == 'pink'){
-                pokemon_species_data['color'] = "#FFB6C1";
-                pokemon_species_data['textColor'] = "#818181";
-            }
-            else if(pokemonColor == 'purple'){
-                pokemon_species_data['color'] = "#9F5BBA";
-                pokemon_species_data['textColor'] = "white";
-            }
-            else if(pokemonColor == 'red'){
-                pokemon_species_data['color'] = "#F7786B";
-                pokemon_species_data['textColor'] = "white";
-            }
-            else if(pokemonColor == 'white'){
-                pokemon_species_data['color'] = "white";
-                pokemon_species_data['textColor'] = "#818181";
-            }
-            else if(pokemonColor == 'yellow'){
-                pokemon_species_data['color'] = "#FFCE4B";
-                pokemon_species_data['textColor'] = "white";
-            }
-            pokemon_species_data['evolution_chain'] = res.evolution_chain;
-            pokemon_species_data['growth_rate'] = res.growth_rate;
-            pokemon_species_data['base_happiness'] = res.base_happiness;
-            this.setState({
-                pokemon_species_data: pokemon_species_data
-            })
-            this.setState({
-                isLoad: true
-            })
-        })
+        
         
     }
     handleClick(e, index) {
@@ -195,12 +199,16 @@ class PokemonDetail extends Component {
             currentPage: index
         });
     }
-    handleCatchButton(){
-        let random = Math.random() >= 0.5;
-        if(window.confirm("Success Rate: 50%. Continue ?")){
-            var retVal = prompt("Enter Pokemon Nickname : ", "");
-            console.log(retVal)
+    handleReleaseButton(){
+        console.log('asd')
+        if(window.confirm(`Are you sure want to release ${this.state.pokemon_data.nickname} ?`)){
+            alert(`Bye ${this.state.pokemon_data.nickname}~`);
+            API.deletePokemon(this.props.match.params.id).then(res=>{
+                this.props.history.push(`/owned`);
+            })
         }
+       
+        
     }
     render() {
         const { currentPage } = this.state;
@@ -222,8 +230,13 @@ class PokemonDetail extends Component {
                                     </div>
                                     <div id="pokemon_details_description" className="col-lg-6 col-md-6 col-sm-12 col-12 p-5">
                                         <TitleComponent
-                                            title_start={this.state.pokemon_data.pokemon_name}
+                                            title_start={this.state.pokemon_data.nickname}
                                             colorTitle="#e95e1e"
+                                        />
+                                        <DescriptionComponent
+                                            description_text={`${this.state.pokemon_data.pokemon_name}`}
+                                            description_text_color="white"
+                                            fontSize="35px"
                                         />
                                         <DescriptionComponent
                                             description_text={`#${this.state.pokemon_data.pokemon_id}`}
@@ -288,9 +301,7 @@ class PokemonDetail extends Component {
 
                                         <div className="row">
                                             <div className="col">
-                                                <Button className="mb-3" onClick={this.handleCatchButton} style={{backgroundColor:"#e95e1e", marginLeft:"0", paddingBottom:"3", color:"#f5f6f8", borderColor:"transparent"}}>Catch Pokemon</Button>
-                                             
-                                                <h5 style={{color:"white"}}><span style={{color:"#e95e1e"}}>x</span> Pokemon Owned</h5>
+                                                <Button className="mb-3" onClick={this.handleReleaseButton} style={{backgroundColor:"#e95e1e", marginLeft:"0", paddingBottom:"3", color:"#f5f6f8", borderColor:"transparent"}}>Release Pokemon</Button>
                                             </div>
                                         </div>
                                     </div>
@@ -386,7 +397,7 @@ class PokemonDetail extends Component {
                                             {
                                                 <div>
                                                     <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} />
-                                                    <p className="text-center">{this.state.prevId}</p>
+                                                    <p className="text-center">#{this.state.prevId}</p>
                                                 </div>
                                             }
                                         </a>
@@ -398,7 +409,7 @@ class PokemonDetail extends Component {
                                             {   
                                                 <div>
                                                     <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} />
-                                                    <p className="text-center">{this.state.nextId}</p>
+                                                    <p className="text-center">#{this.state.nextId}</p>
                                                 </div>
                                             }
                                         </a>
@@ -420,4 +431,4 @@ class PokemonDetail extends Component {
 export default connect(
     state => state,
     { getInitalData }
-)(PokemonDetail);
+)(PokemonOwnedDetail);
