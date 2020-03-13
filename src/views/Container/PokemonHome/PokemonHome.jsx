@@ -81,11 +81,27 @@ class PokemonHome extends Component {
                 if(this.state.pokemon_count_total <= 6){
                     let shown_pokemon = [...this.state.shown_pokemon];
                     res.map(data=>{
-                        shown_pokemon = [...this.state.shown_pokemon, data];
+                        shown_pokemon = [...shown_pokemon, data];
                     })
+                    console.log(shown_pokemon)
                     this.setState({
                         shown_pokemon: shown_pokemon,
                         shown_pokemon_count: this.state.pokemon_count_total
+                    },()=>{
+                        let result = [];
+                        this.state.shown_pokemon.map(async data=>{
+                            await API.getPokemonData(data.pokemon_id).then(res=>{
+                                console.log(res)
+                                let pokemonData = [];
+                                pokemonData['img'] = res.sprites
+                                pokemonData['nickname'] = data.nickname
+                                pokemonData['id'] = data.id
+                                result = [...result, pokemonData]
+                                this.setState({
+                                    shown_pokemon_data: result
+                                })
+                            })
+                        })
                     })
                 }
                 else{
@@ -108,6 +124,7 @@ class PokemonHome extends Component {
                         let result = [];
                         this.state.shown_pokemon.map(async data=>{
                             await API.getPokemonData(data.pokemon_id).then(res=>{
+                                console.log(res)
                                 let pokemonData = [];
                                 pokemonData['img'] = res.sprites
                                 pokemonData['nickname'] = data.nickname
