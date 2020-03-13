@@ -247,8 +247,10 @@ class PokemonOwnedDetail extends Component {
             
             API.deletePokemon(this.props.match.params.id).then(res=>{
                 console.log(res)
-                alert(`Bye ${this.state.pokemon_data.nickname}~`);
-                window.location = '/owned';
+                if(res.status=='200'){
+                    alert(`Bye ${this.state.pokemon_data.nickname}~`);
+                    window.location = '/owned';
+                }
             })
             
         }
