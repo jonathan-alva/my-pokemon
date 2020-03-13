@@ -1,0 +1,66 @@
+#choose-pokemon-type{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+}
+.title-page{
+    font-size:xx-large;
+}
+#my_pokemon_header {
+    background-image: url('../../../assets/image/my_pokemon_bg.jpg');
+    height: 100%;
+    opacity: 0.8;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 15%;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+.content_pokemon_list_header{
+    width: 50%;
+}
+.page-link {
+    background-color: transparent;
+    color: #818181;
+    font-family: 'Segoe UI Bold';
+    font-size: medium;
+}
+
+li.page-item.active .page-link {
+    background-color: #818181;
+    color: #ffffff;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .content_pokemon_list_header{
+        width: 100%;
+    }
+    #my_pokemon_header {
+        padding-top: 40%;
+    }
+    #my_pokemon_header .description {
+        padding-right: 0 !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    
+
+}
+
+@media (min-width: 1025px) {
+
+
+}
+
+@media (min-width: 1800px) {
+
+    #my_pokemon_header .description {
+        padding-right: 63% !important;
+    }
+
+}

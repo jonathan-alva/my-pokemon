@@ -1,0 +1,64 @@
+#main_list {
+    list-style-type: disc;
+    font-family: 'Segoe UI Regular';
+}
+#main_list li {
+    margin-bottom: 2%;
+    font-size: 17px;
+}
+.second_section {
+    padding: 5%;
+}
+.page-link {
+    background-color: transparent;
+    border: none;
+    font-family: 'Segoe UI Bold';
+    font-size: medium;
+}
+
+li.page-item.active .page-link {
+    background-color: transparent;
+    color: #e95e1e;
+}
+.fix-line-height-text{
+    line-height: 18px;
+}
+.center-element{
+    margin-left: auto;
+    margin-right: auto;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.separator{
+    border-top: 2px solid rgba(0,0,0,.3);
+}
+.progress-bar{
+    background-color: #e95e1e
+}
+@media (max-width: 767px) {
+
+    #pokemon_details_description {
+        padding-top: 0 !important;
+    }
+    .second_section {
+        padding-top: 10%;
+    }}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    #pokemon_details_image img {
+        object-fit: scale-down !important;
+        width: 110% !important;
+    }
+
+}
+
+@media (max-width: 4000px) and (min-width: 1900px) {
+
+    #main_list li {
+        font-size: 27px;
+    }
+
+}

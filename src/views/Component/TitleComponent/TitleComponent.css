@@ -1,0 +1,42 @@
+.title_start, .title_end {
+    font-size: 2.5rem;
+    font-family: 'Segoe UI Bold';
+}
+
+#x_pokemon {
+    font-size: 2.5rem;
+    font-family: 'Segoe UI Bold';
+    color: #e95e1e;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+    #x_pokemon, .title_start, .title_end {
+        font-size: 1.5rem !important;
+    }
+    #description p {
+        margin-bottom: 10%;
+        font-size: 1rem;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+    #x_pokemon, .title_start, .title_end {
+        font-size: 2.5rem !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+    #x_pokemon, .title_start, .title_end {
+        font-size: 1.5rem !important;
+    }
+    #description p {
+        margin-bottom: 10%;
+        font-size: 1rem;
+    }
+    
+}

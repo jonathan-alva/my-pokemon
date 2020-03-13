@@ -1,0 +1,14 @@
+.navbar-brand{
+  width: 10%;
+}
+.navbar-brand img{
+  width: 80%;
+}
+@media(max-width: 767px){
+    .navbar-brand{
+      width: 60%;
+    }
+    .navbar-brand img{
+      width: 60%;
+    }
+}
