@@ -159,7 +159,6 @@ class PokemonOwnedDetail extends Component {
                         API.getPokemonOwnedID(nextId).then(res=>{
                             let pokemonNickname = res[0].nickname
                             API.getPokemonData(res[0].pokemon_id).then(res=>{
-                                console.log(pokemonNickname)
                                 this.setState({
                                     nextDetail:res.sprites.front_default,
                                     nextId: pokemonNickname,
@@ -248,8 +247,10 @@ class PokemonOwnedDetail extends Component {
             
             API.deletePokemon(this.props.match.params.id).then(res=>{
                 console.log(res)
-                alert(`Bye ${this.state.pokemon_data.nickname}~`);
-                window.location = '/owned';
+                if(res.status=='200'){
+                    alert(`Bye ${this.state.pokemon_data.nickname}~`);
+                    window.location = '/owned';
+                }
             })
             
         }
