@@ -38,140 +38,137 @@ class PokemonList extends Component {
             res.map(data=>{
                 arrayOfOwnedPokemon = [...arrayOfOwnedPokemon, data.pokemon_id]
             })
-            // console.log(arrayOfOwnedPokemon)
             arrayOfOwnedPokemon.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
             this.setState({
                 pokemonOwned: counts
             },()=>{
                 console.log(this.state.pokemonOwned)
-            })
-            console.log(counts)
-        })
-        API.getPokemonSpeciesOffset(page).then(res=>{
-            res.results.map(data=>{
-                let pokemonData = [];
-                let currentData = [...this.state.currentData];
-                
-                let pokemonId = data.url.split('/')[6];
-                API.getPokemonOwnedCountID(pokemonId).then(res=>{
-                    if(res.length === 0){
-                        pokemonData['owned_total'] = 0
-                    }
-                    else{
-                        pokemonData['owned_total'] = res[0].cnt
-                    }
-                })
-                API.getPokemonSpeciesData(pokemonId).then(r=>{
-                    let pokemonColor = r.color.name;
-                    // console.log(pokemonColor)
-                    if(pokemonColor === 'black'){
-                        pokemonData['color'] = "#303943";
-                        pokemonData['textColor'] = "white";
-                    }
-                    else if(pokemonColor === 'blue'){
-                        pokemonData['color'] = "#58abf6";
-                        pokemonData['textColor'] = "white";
-                    }
-                    else if(pokemonColor === 'brown'){
-                        pokemonData['color'] = "#CA8179";
-                        pokemonData['textColor'] = "white";
-                    }
-                    else if(pokemonColor === 'gray'){
-                        pokemonData['color'] = "#F5F5F5";
-                        pokemonData['textColor'] = "#818181";
-                    }
-                    else if(pokemonColor === 'green'){
-                        pokemonData['color'] = "#2CDAB1";
-                        pokemonData['textColor'] = "white";
-                    }
-                    else if(pokemonColor === 'pink'){
-                        pokemonData['color'] = "#FFB6C1";
-                        pokemonData['textColor'] = "#818181";
-                    }
-                    else if(pokemonColor === 'purple'){
-                        pokemonData['color'] = "#9F5BBA";
-                        pokemonData['textColor'] = "white";
-                    }
-                    else if(pokemonColor === 'red'){
-                        pokemonData['color'] = "#F7786B";
-                        pokemonData['textColor'] = "white";
-                    }
-                    else if(pokemonColor === 'white'){
-                        pokemonData['color'] = "white";
-                        pokemonData['textColor'] = "#818181";
-                    }
-                    else if(pokemonColor === 'yellow'){
-                        pokemonData['color'] = "#FFCE4B";
-                        pokemonData['textColor'] = "white";
-                    }
-                })
-                API.getPokemonData(pokemonId).then(r =>{
-                    let pokemonTypeList = r.types;
-                    if(pokemonTypeList.length === 1){
-                        pokemonData['type1'] = pokemonTypeList[0].type.name.charAt(0).toUpperCase() + pokemonTypeList[0].type.name.slice(1);
-                        pokemonData['type2'] = "";
-                    }
-                    else{
-                        pokemonData['type1'] = pokemonTypeList[0].type.name.charAt(0).toUpperCase() + pokemonTypeList[0].type.name.slice(1);
-                        pokemonData['type2'] = pokemonTypeList[1].type.name.charAt(0).toUpperCase() + pokemonTypeList[1].type.name.slice(1);
-                    }
-                    if(r.sprites != null){
-                        this.setState({
-                            pageCount: Math.floor(res.count/20)
-                        },()=>{
-                            if(pageNumber !== 0 && pageNumber !== this.state.pageCount){
-                                this.setState({
-                                    prevButton: pageNumber-1,
-                                    number1Button: pageNumber-1,
-                                    number2Button: pageNumber,
-                                    number3Button: pageNumber+1,
-                                    nextButton: pageNumber+1,
-                                    prevDisable: "",
-                                    nextDisable: "",
-                                    active1Button: "",
-                                    active2Button: "active",
-                                    active3Button: ""
-                                })
+                API.getPokemonSpeciesOffset(page).then(res=>{
+                    res.results.map(data=>{
+                        let pokemonData = [];
+                        let currentData = [...this.state.currentData];
+                        
+                        let pokemonId = data.url.split('/')[6];
+                        if(this.state.pokemonOwned[pokemonId]==undefined){
+                            pokemonData['owned_total'] = 0
+                        }
+                        else{
+                            pokemonData['owned_total'] = this.state.pokemonOwned[pokemonId]
+                        }
+                        API.getPokemonSpeciesData(pokemonId).then(r=>{
+                            let pokemonColor = r.color.name;
+                            // console.log(pokemonColor)
+                            if(pokemonColor === 'black'){
+                                pokemonData['color'] = "#303943";
+                                pokemonData['textColor'] = "white";
                             }
-                            else if(pageNumber === 0){
-                                this.setState({
-                                    prevButton: 0,
-                                    number1Button: pageNumber,
-                                    number2Button: pageNumber+1,
-                                    number3Button: pageNumber+2,
-                                    nextButton: pageNumber+1,
-                                    prevDisable: "disabled",
-                                    active1Button: "active",
-                                    active2Button: "",
-                                    active3Button: ""
-                                })
+                            else if(pokemonColor === 'blue'){
+                                pokemonData['color'] = "#58abf6";
+                                pokemonData['textColor'] = "white";
                             }
-                            else if(pageNumber === this.state.pageCount){
-                                this.setState({
-                                    prevButton: pageNumber-1,
-                                    number1Button: pageNumber-2,
-                                    number2Button: pageNumber-1,
-                                    number3Button: pageNumber,
-                                    nextButton: 0,
-                                    nextDisable: "disabled",
-                                    active1Button: "",
-                                    active2Button: "",
-                                    active3Button: "active"
-                                })
+                            else if(pokemonColor === 'brown'){
+                                pokemonData['color'] = "#CA8179";
+                                pokemonData['textColor'] = "white";
+                            }
+                            else if(pokemonColor === 'gray'){
+                                pokemonData['color'] = "#F5F5F5";
+                                pokemonData['textColor'] = "#818181";
+                            }
+                            else if(pokemonColor === 'green'){
+                                pokemonData['color'] = "#2CDAB1";
+                                pokemonData['textColor'] = "white";
+                            }
+                            else if(pokemonColor === 'pink'){
+                                pokemonData['color'] = "#FFB6C1";
+                                pokemonData['textColor'] = "#818181";
+                            }
+                            else if(pokemonColor === 'purple'){
+                                pokemonData['color'] = "#9F5BBA";
+                                pokemonData['textColor'] = "white";
+                            }
+                            else if(pokemonColor === 'red'){
+                                pokemonData['color'] = "#F7786B";
+                                pokemonData['textColor'] = "white";
+                            }
+                            else if(pokemonColor === 'white'){
+                                pokemonData['color'] = "white";
+                                pokemonData['textColor'] = "#818181";
+                            }
+                            else if(pokemonColor === 'yellow'){
+                                pokemonData['color'] = "#FFCE4B";
+                                pokemonData['textColor'] = "white";
                             }
                         })
-                    }
-                    pokemonData['form'] = r.sprites;
-                    pokemonData['name'] = r.name.charAt(0).toUpperCase() + r.name.slice(1);
-                    pokemonData['id'] = pokemonId;
-                    pokemonData['data_id'] = pokemonId
-                    currentData = [...this.state.currentData, pokemonData];
-                    this.setState({
-                        currentData: currentData
+                        API.getPokemonData(pokemonId).then(r =>{
+                            let pokemonTypeList = r.types;
+                            if(pokemonTypeList.length === 1){
+                                pokemonData['type1'] = pokemonTypeList[0].type.name.charAt(0).toUpperCase() + pokemonTypeList[0].type.name.slice(1);
+                                pokemonData['type2'] = "";
+                            }
+                            else{
+                                pokemonData['type1'] = pokemonTypeList[0].type.name.charAt(0).toUpperCase() + pokemonTypeList[0].type.name.slice(1);
+                                pokemonData['type2'] = pokemonTypeList[1].type.name.charAt(0).toUpperCase() + pokemonTypeList[1].type.name.slice(1);
+                            }
+                            if(r.sprites != null){
+                                this.setState({
+                                    pageCount: Math.floor(res.count/20)
+                                },()=>{
+                                    if(pageNumber !== 0 && pageNumber !== this.state.pageCount){
+                                        this.setState({
+                                            prevButton: pageNumber-1,
+                                            number1Button: pageNumber-1,
+                                            number2Button: pageNumber,
+                                            number3Button: pageNumber+1,
+                                            nextButton: pageNumber+1,
+                                            prevDisable: "",
+                                            nextDisable: "",
+                                            active1Button: "",
+                                            active2Button: "active",
+                                            active3Button: ""
+                                        })
+                                    }
+                                    else if(pageNumber === 0){
+                                        this.setState({
+                                            prevButton: 0,
+                                            number1Button: pageNumber,
+                                            number2Button: pageNumber+1,
+                                            number3Button: pageNumber+2,
+                                            nextButton: pageNumber+1,
+                                            prevDisable: "disabled",
+                                            active1Button: "active",
+                                            active2Button: "",
+                                            active3Button: ""
+                                        })
+                                    }
+                                    else if(pageNumber === this.state.pageCount){
+                                        this.setState({
+                                            prevButton: pageNumber-1,
+                                            number1Button: pageNumber-2,
+                                            number2Button: pageNumber-1,
+                                            number3Button: pageNumber,
+                                            nextButton: 0,
+                                            nextDisable: "disabled",
+                                            active1Button: "",
+                                            active2Button: "",
+                                            active3Button: "active"
+                                        })
+                                    }
+                                })
+                            }
+                            pokemonData['form'] = r.sprites;
+                            pokemonData['name'] = r.name.charAt(0).toUpperCase() + r.name.slice(1);
+                            pokemonData['id'] = pokemonId;
+                            pokemonData['data_id'] = pokemonId
+                            currentData = [...this.state.currentData, pokemonData];
+                            this.setState({
+                                currentData: currentData
+                            })
+                        })
                     })
                 })
             })
         })
+        
     }
 
     render() {
