@@ -6,8 +6,8 @@
 .title-page{
     font-size:xx-large;
 }
-#pokemon_list_header {
-    background-image: url('../../../assets/image/pokemon-list-bg.jpg');
+#my_pokemon_header {
+    background-image: url('../../../assets/image/my_pokemon_bg.jpg');
     height: 100%;
     opacity: 0.8;
     background-position: center;
@@ -37,10 +37,10 @@ li.page-item.active .page-link {
     .content_pokemon_list_header{
         width: 100%;
     }
-    #pokemon_list_header {
+    #my_pokemon_header {
         padding-top: 40%;
     }
-    #pokemon_list_header .description {
+    #my_pokemon_header .description {
         padding-right: 0 !important;
     }
 
@@ -59,7 +59,7 @@ li.page-item.active .page-link {
 
 @media (min-width: 1800px) {
 
-    #pokemon_list_header .description {
+    #my_pokemon_header .description {
         padding-right: 63% !important;
     }
 

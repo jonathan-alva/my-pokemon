@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
+import NavBarComponent from '../views/Component/NavBarComponent/NavBarComponent';
 
 // routes config
 import routes from '../routes';
@@ -15,6 +16,7 @@ loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</di
 					{/* Navbar */}
 					<main className="main">
 						<div style={{overflowX:"hidden"}}>
+							<NavBarComponent/>
 							<Suspense fallback={this.loading()}>
 								<Switch>
 									{routes.map((route, idx) => {

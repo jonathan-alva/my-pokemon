@@ -107,7 +107,7 @@ class PokemonOwned extends Component {
             obj.sort((a,b)=>a.data_id - b.data_id);
 
             obj.map((res,i)=>{
-                if(res!=[] && res.name != undefined && res.id!=undefined && res.form.front_default!=undefined){
+                if(res!=[] && res.name != undefined && res.id!=undefined && res.form.front_default!=undefined && res.color!= undefined && res.textColor != undefined){
                     element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
                         <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../owned/detail/"/>
                     </div>]
@@ -116,13 +116,13 @@ class PokemonOwned extends Component {
             return (
                 <div style={{overflow:"hidden"}}>
                     <div className="container-fluid" style={{ backgroundColor: "#2c2c2c", paddingLeft: "0", paddingRight: "0" }}>
-                        <div id="pokemon_list_header">
+                        <div id="my_pokemon_header">
                             <div className="p-2 content_pokemon_list_header rounded" style={{backgroundColor:"rgba(69,148,205,0.9)"}}>
                                 <TitleComponent
-                                    title_middle="POKEMON LIST"
+                                    title_middle="MY POKEMON"
                                 />
                                 <DescriptionComponent
-                                    description_text="This is a list of every Pokemon in this world."
+                                    description_text="This is a list of every Pokemon you have catch."
                                     description_text_color="white"
                                     description_padding_right="0"
                                     fontSize="1.5rem"

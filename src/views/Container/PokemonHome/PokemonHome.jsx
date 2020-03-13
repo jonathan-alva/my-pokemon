@@ -215,7 +215,7 @@ class PokemonHome extends Component {
                                     <div className="row">
                                         {
                                             this.state.pokemon_data_type.map((res,i)=>(
-                                                <div className="col-md-3 col-xs-3 col-3 col-lg-3">
+                                                <div className="col-md-3 col-xs-3 col-3 col-lg-3" key={i}>
                                                     <p>{res.type}</p>
                                                     <p>{res.count}</p>
                                                 </div>  
