@@ -159,7 +159,6 @@ class PokemonOwnedDetail extends Component {
                         API.getPokemonOwnedID(nextId).then(res=>{
                             let pokemonNickname = res[0].nickname
                             API.getPokemonData(res[0].pokemon_id).then(res=>{
-                                console.log(pokemonNickname)
                                 this.setState({
                                     nextDetail:res.sprites.front_default,
                                     nextId: pokemonNickname,

@@ -22,7 +22,7 @@ const getAbilityData = (id) => Get(`ability/${id}`, true)
 const getMoveData = (id) => Get(`move/${id}`, true);
 const getStatData = (id) => Get(`stat/${id}`, true);
 
-const deletePokemon = (id) => Delete(`/Delete/DeletePokemon.php?id=${id}`, false);
+const deletePokemon = (id) => Get(`Delete/DeletePokemon.php?id=${id}`, false);
 
 const postPokemon = (pokemon_id, nickname) => Get(`Post/PostPokemonOwned.php?pokemon_id=${pokemon_id}&nickname=${nickname}`, false);
 
