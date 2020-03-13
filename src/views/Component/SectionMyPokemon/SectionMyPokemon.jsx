@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import TitleComponent from '../TitleComponent/TitleComponent';
 import DescriptionComponent from '../DescriptionComponent/DescriptionComponent';
-import ButtonComponent from '../ButtonComponent/ButtonComponent';
 class SectionMyPokemon extends Component {
 
     constructor(props) {
@@ -22,12 +21,6 @@ class SectionMyPokemon extends Component {
                     description_text={this.props.description_text}
                     description_text_color={this.props.description_text_color}
                     description_text_align={this.props.description_text_align}
-                />
-                <ButtonComponent
-                    link_lihat={this.props.link_lihat} button_lihat={this.props.button_lihat}
-                    colorButton={this.props.colorButton} borderColorButton={this.props.borderColorButton}
-                    paddingTopButton={this.props.paddingTopButton} paddingBottomButton={this.props.paddingBottomButton}
-                    paddingLeftButton={this.props.paddingLeftButton} paddingRightButton={this.props.paddingRightButton}
                 />
             </Fragment>
         )

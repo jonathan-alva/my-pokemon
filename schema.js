@@ -18,33 +18,33 @@ con.connect(function (err) {
     console.log("Table Dropped");
   });
 
-  sql = "CREATE TABLE MY_POKEMON (id int AUTO_INCREMENT PRIMARY KEY, pokemon_id int NOT NULL, nickname VARCHAR(255) NOT NULL, is_active BOOLEAN )"
+  sql = "CREATE TABLE MY_POKEMON (id int AUTO_INCREMENT PRIMARY KEY, pokemon_id int NOT NULL, nickname VARCHAR(255) NOT NULL )"
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table created");
   });
 
-  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname, is_active) values ('1', 'Bubasur 1', '0');";
+  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname) values ('1', 'Bubasur 1');";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Record Created");
   });
-  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname, is_active) values ('1', 'Bubasur 2', '0');";
+  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname) values ('1', 'Bubasur 2');";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Record Created");
   });
-  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname, is_active) values ('1', 'Bubasur 3', '0');";
+  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname) values ('1', 'Bubasur 3');";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Record Created");
   });
-  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname, is_active) values ('1', 'Bubasur 4', '0');";
+  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname) values ('1', 'Bubasur 4');";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Record Created");
   });
-  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname, is_active) values ('1', 'Bubasur 5', '0');";
+  sql = "INSERT INTO MY_POKEMON (pokemon_id, nickname) values ('1', 'Bubasur 5');";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Record Created");

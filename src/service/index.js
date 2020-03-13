@@ -5,11 +5,13 @@ import Delete from './Delete'
 
 
 const getPokemonOwned = () => Get('/Get/GetPokemonOwned.php', false);
-const getPokemonOwnedCount = (id) => Get(`/Get/GetPokemonOwnedWithCount.php?id=${id}`, false);
+const getPokemonOwnedCount = () => Get(`/Get/GetPokemonOwnedWithCount.php`, false);
+const getPokemonOwnedCountID = (id) => Get(`/Get/GetPokemonOwnedWithCount.php?id=${id}`, false);
 const getPokemonOwnedID = (id) => Get(`/Get/GetPokemonOwned.php?id=${id}`, false);
-const getPokemonList = (offset) => Get(`/pokemon?offset=${offset}&limit=20`, true);
-const getPokemonTypes = () => Get('/type', true);
-const getPokemonHabitats = () => Get('/pokemon-habitat', true);
+const getPokemonList = (offset) => Get(`pokemon?offset=${offset}&limit=20`, true);
+const getPokemonTypes = () => Get('type', true);
+const getPokemonTypesData = (id) => Get(`type/${id}`, true);
+const getPokemonHabitats = () => Get('pokemon-habitat', true);
 const getPokemonSpecies = () => Get('pokemon-species', true);
 const getPokemonSpeciesOffset = (offset) => Get(`pokemon-species?offset=${offset}&limit=20`, true);
 const getPokemonSpeciesData = (id) => Get(`pokemon-species/${id}`, true);
@@ -29,8 +31,10 @@ const API = {
     getPokemonList,
     getPokemonOwned,
     getPokemonOwnedCount,
+    getPokemonOwnedCountID,
     getPokemonOwnedID,
     getPokemonTypes,
+    getPokemonTypesData,
     getPokemonHabitats,
     getPokemonSpecies,
     getPokemonSpeciesOffset,

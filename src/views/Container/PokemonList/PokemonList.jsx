@@ -36,7 +36,7 @@ class PokemonList extends Component {
                 let currentData = [...this.state.currentData];
                 
                 let pokemonId = data.url.split('/')[6];
-                API.getPokemonOwnedCount(pokemonId).then(res=>{
+                API.getPokemonOwnedCountID(pokemonId).then(res=>{
                     if(res.length == 0){
                         pokemonData['owned_total'] = 0
                     }
