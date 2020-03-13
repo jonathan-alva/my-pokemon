@@ -239,9 +239,9 @@ class PokemonDetail extends Component {
                     pokemon_id: this.state.pokemon_data.pokemon_id,
                     nickname: retVal
                 }
-                API.postPokemon(data).then(res=>{
-                    console.log(res['data'])
-                    if(res['data'] == 'success'){
+                API.postPokemon(data.pokemon_id, data.nickname).then(res=>{
+                    console.log(res)
+                    if(res['status'] == '200'){
                         this.setState({
                             pokemon_count: parseInt(this.state.pokemon_count)+1
                         })
