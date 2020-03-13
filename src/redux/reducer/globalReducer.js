@@ -1,7 +1,7 @@
 import ActionType from './globalActionType';
 import thunkMiddleware from "redux-thunk";
 import { createStore, applyMiddleware } from "redux";
-import API from '../../service';
+// import API from '../../service';
 
 const globalState = {
     pokemonType: [],

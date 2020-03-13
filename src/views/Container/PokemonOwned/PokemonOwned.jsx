@@ -30,50 +30,50 @@ class PokemonOwned extends Component {
                 pokemonData['data_id'] = data.id;
                 API.getPokemonSpeciesData(pokemon_id).then(r=>{
                     let pokemonColor = r.color.name;
-                    if(pokemonColor == 'black'){
+                    if(pokemonColor === 'black'){
                         pokemonData['color'] = "#303943";
                         pokemonData['textColor'] = "white";
                     }
-                    else if(pokemonColor == 'blue'){
+                    else if(pokemonColor === 'blue'){
                         pokemonData['color'] = "#58abf6";
                         pokemonData['textColor'] = "white";
                     }
-                    else if(pokemonColor == 'brown'){
+                    else if(pokemonColor === 'brown'){
                         pokemonData['color'] = "#CA8179";
                         pokemonData['textColor'] = "white";
                     }
-                    else if(pokemonColor == 'gray'){
+                    else if(pokemonColor === 'gray'){
                         pokemonData['color'] = "#F5F5F5";
                         pokemonData['textColor'] = "#818181";
                     }
-                    else if(pokemonColor == 'green'){
+                    else if(pokemonColor === 'green'){
                         pokemonData['color'] = "#2CDAB1";
                         pokemonData['textColor'] = "white";
                     }
-                    else if(pokemonColor == 'pink'){
+                    else if(pokemonColor === 'pink'){
                         pokemonData['color'] = "#FFB6C1";
                         pokemonData['textColor'] = "#818181";
                     }
-                    else if(pokemonColor == 'purple'){
+                    else if(pokemonColor === 'purple'){
                         pokemonData['color'] = "#9F5BBA";
                         pokemonData['textColor'] = "white";
                     }
-                    else if(pokemonColor == 'red'){
+                    else if(pokemonColor === 'red'){
                         pokemonData['color'] = "#F7786B";
                         pokemonData['textColor'] = "white";
                     }
-                    else if(pokemonColor == 'white'){
+                    else if(pokemonColor === 'white'){
                         pokemonData['color'] = "white";
                         pokemonData['textColor'] = "#818181";
                     }
-                    else if(pokemonColor == 'yellow'){
+                    else if(pokemonColor === 'yellow'){
                         pokemonData['color'] = "#FFCE4B";
                         pokemonData['textColor'] = "white";
                     }
                 })
                 API.getPokemonData(pokemon_id).then(r =>{
                     let pokemonTypeList = r.types;
-                    if(pokemonTypeList.length == 1){
+                    if(pokemonTypeList.length === 1){
                         pokemonData['type1'] = pokemonTypeList[0].type.name.charAt(0).toUpperCase() + pokemonTypeList[0].type.name.slice(1);
                         pokemonData['type2'] = "";
                     }
@@ -103,11 +103,11 @@ class PokemonOwned extends Component {
         const data = this.state.currentData;
         let obj = [...data];
         let element = [];
-        if(data.length != 0){
+        if(data.length !== 0){
             obj.sort((a,b)=>a.data_id - b.data_id);
 
             obj.map((res,i)=>{
-                if(res!=[] && res.name != undefined && res.id!=undefined && res.form.front_default!=undefined && res.color!= undefined && res.textColor != undefined){
+                if(res!==[] && res.name !== undefined && res.id!==undefined && res.form.front_default!==undefined && res.color!== undefined && res.textColor !== undefined){
                     element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
                         <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../owned/detail/"/>
                     </div>]

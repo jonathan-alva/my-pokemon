@@ -77,7 +77,7 @@ class PokemonOwnedDetail extends Component {
                         API.getAbilityData(ability_id).then(res=>{
                             data['short_effect'] = res.effect_entries[0].short_effect;
                             res.names.map(res=>{
-                                if(res.language.name == 'en'){
+                                if(res.language.name === 'en'){
                                     data['name'] = res.name;
                                 }
                             });
@@ -94,7 +94,7 @@ class PokemonOwnedDetail extends Component {
                         API.getMoveData(move_id).then(res=>{
                             data['pp'] = res.pp;
                             res.names.map(res=>{
-                                if(res.language.name == 'en'){
+                                if(res.language.name === 'en'){
                                     data['name'] = res.name;
                                 }
                             });
@@ -110,7 +110,7 @@ class PokemonOwnedDetail extends Component {
                         data['base_stat'] = res.base_stat;
                         API.getStatData(state_id).then(res=>{
                             res.names.map(res=>{
-                                if(res.language.name == 'en'){
+                                if(res.language.name === 'en'){
                                     data['name'] = res.name;
                                 }
                             });
@@ -131,7 +131,7 @@ class PokemonOwnedDetail extends Component {
                     let indexCurrentId = arrOfPokemonOwnedId.indexOf(id);
                     let nextId = parseInt(arrOfPokemonOwnedId[indexCurrentId+1])
                     let prevId = parseInt(arrOfPokemonOwnedId[indexCurrentId-1])
-                    if(indexCurrentId == 0){
+                    if(indexCurrentId === 0){
                         API.getPokemonOwnedID(nextId).then(res=>{
                             let pokemonNickname = res[0].nickname
                             API.getPokemonData(res[0].pokemon_id).then(res=>{
@@ -143,7 +143,7 @@ class PokemonOwnedDetail extends Component {
                             })                            
                         })
                     }
-                    else if(indexCurrentId == indexCurrentId.length-1){
+                    else if(indexCurrentId === indexCurrentId.length-1){
                         API.getPokemonOwnedID(prevId).then(res=>{
                             let pokemonNickname = res[0].nickname
                             API.getPokemonData(res[0].pokemon_id).then(res=>{
@@ -182,43 +182,43 @@ class PokemonOwnedDetail extends Component {
                 
                 let pokemon_species_data = {...this.state.pokemon_species_data};
                 let pokemonColor = res.color.name;
-                if(pokemonColor == 'black'){
+                if(pokemonColor === 'black'){
                     pokemon_species_data['color'] = "#303943";
                     pokemon_species_data['textColor'] = "white";
                 }
-                else if(pokemonColor == 'blue'){
+                else if(pokemonColor === 'blue'){
                     pokemon_species_data['color'] = "#58abf6";
                     pokemon_species_data['textColor'] = "white";
                 }
-                else if(pokemonColor == 'brown'){
+                else if(pokemonColor === 'brown'){
                     pokemon_species_data['color'] = "#CA8179";
                     pokemon_species_data['textColor'] = "white";
                 }
-                else if(pokemonColor == 'gray'){
+                else if(pokemonColor === 'gray'){
                     pokemon_species_data['color'] = "#F5F5F5";
                     pokemon_species_data['textColor'] = "#818181";
                 }
-                else if(pokemonColor == 'green'){
+                else if(pokemonColor === 'green'){
                     pokemon_species_data['color'] = "#2CDAB1";
                     pokemon_species_data['textColor'] = "white";
                 }
-                else if(pokemonColor == 'pink'){
+                else if(pokemonColor === 'pink'){
                     pokemon_species_data['color'] = "#FFB6C1";
                     pokemon_species_data['textColor'] = "#818181";
                 }
-                else if(pokemonColor == 'purple'){
+                else if(pokemonColor === 'purple'){
                     pokemon_species_data['color'] = "#9F5BBA";
                     pokemon_species_data['textColor'] = "white";
                 }
-                else if(pokemonColor == 'red'){
+                else if(pokemonColor === 'red'){
                     pokemon_species_data['color'] = "#F7786B";
                     pokemon_species_data['textColor'] = "white";
                 }
-                else if(pokemonColor == 'white'){
+                else if(pokemonColor === 'white'){
                     pokemon_species_data['color'] = "white";
                     pokemon_species_data['textColor'] = "#818181";
                 }
-                else if(pokemonColor == 'yellow'){
+                else if(pokemonColor === 'yellow'){
                     pokemon_species_data['color'] = "#FFCE4B";
                     pokemon_species_data['textColor'] = "white";
                 }
@@ -247,7 +247,7 @@ class PokemonOwnedDetail extends Component {
             
             API.deletePokemon(this.props.match.params.id).then(res=>{
                 console.log(res)
-                if(res.status=='200'){
+                if(res.status==='200'){
                     alert(`Bye ${this.state.pokemon_data.nickname}~`);
                     window.location = '/owned';
                 }
@@ -259,7 +259,7 @@ class PokemonOwnedDetail extends Component {
     }
     render() {
         const { currentPage } = this.state;
-        if(this.state.isLoad == true && this.state.abilities_data != undefined && this.state.moves_data != undefined && this.state.stats_data != undefined){
+        if(this.state.isLoad === true && this.state.abilities_data !== undefined && this.state.moves_data !== undefined && this.state.stats_data !== undefined){
             let biggestStatNumber = 0;
             this.state.stats_data.map(res=>{
                 if(res.base_stat > biggestStatNumber){
@@ -330,7 +330,7 @@ class PokemonOwnedDetail extends Component {
                                             <h4 style={{color:"white"}}>Other Info</h4>
                                             <hr className="separator" />
                                             {
-                                                this.state.pokemon_data.pokemon_height != undefined ?
+                                                this.state.pokemon_data.pokemon_height !== undefined ?
                                                 <div style={{color:"white"}}>Height - {this.state.pokemon_data.pokemon_height}</div>
                                                 :<div></div>
                                             }
@@ -340,7 +340,7 @@ class PokemonOwnedDetail extends Component {
                                         </div>
                                         <div>
                                             {
-                                                this.state.pokemon_data.pokemon_width != undefined ?
+                                                this.state.pokemon_data.pokemon_width !== undefined ?
                                                 <div>Width - {this.state.pokemon_data.pokemon_width}</div>
                                                 :<div></div>
                                             }
@@ -400,7 +400,7 @@ class PokemonOwnedDetail extends Component {
                                         <div className="col-lg-12 col-md-12 col-sm-12 col-12 mt-5" style={{overflowX:"auto"}}>
                                             <Pagination aria-label="Page navigation example" style={{width:"fit-content", marginLeft:"auto", marginRight:"auto"}}>
                                                     
-                                                    <img src={require('../../../assets/image/pagination/arrow-left.svg')} />
+                                                    <img src={require('../../../assets/image/pagination/arrow-left.svg')} alt="arrow-left"/>
 
                                                     {/* Previous Button for Pagination */}
                                                     <PaginationItem disabled={currentPage <= 0}>
@@ -431,7 +431,7 @@ class PokemonOwnedDetail extends Component {
                                                         />
                                                     </PaginationItem>
 
-                                                    <img src={require('../../../assets/image/pagination/arrow-right.svg')} />
+                                                    <img src={require('../../../assets/image/pagination/arrow-right.svg')} alt="arrow-right"/>
                                             </Pagination>
                                         </div>
                                     </div>
@@ -441,12 +441,12 @@ class PokemonOwnedDetail extends Component {
                                 <div className="w-10 float-left">
                                     <div id="prevDetail">
                                         {
-                                            this.state.prevUrl != ""?
+                                            this.state.prevUrl !== ""?
                                             (
                                             <a href={`../detail/${this.state.prevUrl}`}>
                                                 {
                                                     <div>
-                                                        <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} />
+                                                        <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} alt="prevdetail"/>
                                                         <p className="text-center">{this.state.prevId}</p>
                                                     </div>
                                                 }
@@ -463,7 +463,7 @@ class PokemonOwnedDetail extends Component {
                                                 <a href={`../detail/${this.state.nextUrl}`}>
                                                     {   
                                                         <div>
-                                                            <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} />
+                                                            <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} alt="nextdetail"/>
                                                             <p className="text-center">{this.state.nextId}</p>
                                                         </div>
                                                     }

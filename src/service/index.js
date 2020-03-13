@@ -1,7 +1,7 @@
 import Get from './Get'
-import Post from './Post'
+// import Post from './Post'
 // import Put from './Put'
-import Delete from './Delete'
+// import Delete from './Delete'
 
 
 const getPokemonOwned = () => Get('/Get/GetPokemonOwned.php', false);

@@ -46,7 +46,7 @@ class PokemonHome extends Component {
                     pokemon_types: pokemon_data_by_type,
                 })
                 listOfTemp = pokemon_data_by_type
-                if(listOfTemp.length == this.state.type_count){
+                if(listOfTemp.length === this.state.type_count){
                     API.getPokemonOwned().then(res=>{
                         let pokemon_types_obj = this.state.pokemon_types
                         res.map(data=>{
@@ -54,7 +54,7 @@ class PokemonHome extends Component {
                                 let pokemon_type = pokemon.types;
                                 pokemon_type.map(type=>{
                                     pokemon_types_obj.map(r=>{
-                                        if(r.type_url == type.type.url){
+                                        if(r.type_url === type.type.url){
                                             r.count = r.count+1
                                         }
                                     })

@@ -22,7 +22,7 @@ class PokemonComponent extends Component{
                                     <div className="pt-1 pr-1">
                                         <p className="pokemon-name">{this.props.pokemon_name}</p>
                                         {
-                                            this.props.pokemon_nickname !=""?
+                                            this.props.pokemon_nickname !==""?
                                             <p className="pokemon-nickname">{this.props.pokemon_nickname}</p>:
                                             <p className="pokemon-nickname">{this.props.owned_total} Owned</p>
                                         }
