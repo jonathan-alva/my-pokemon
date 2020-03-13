@@ -24,7 +24,7 @@ const getStatData = (id) => Get(`stat/${id}`, true);
 
 const deletePokemon = (id) => Delete(`/Delete/DeletePokemon.php?id=${id}`, false);
 
-const postPokemon = (data) => Post('Post/PostPokemonOwned.php', false, data);
+const postPokemon = (pokemon_id, nickname) => Get(`Post/PostPokemonOwned.php?pokemon_id=${pokemon_id}&nickname=${nickname}`, false);
 
 const API = {
     //GET

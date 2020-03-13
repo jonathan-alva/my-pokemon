@@ -239,14 +239,14 @@ class PokemonDetail extends Component {
                     pokemon_id: this.state.pokemon_data.pokemon_id,
                     nickname: retVal
                 }
-                API.postPokemon(data).then(res=>{
-                    console.log(res['data'])
-                    if(res['data'] == 'success'){
-                        this.setState({
-                            pokemon_count: parseInt(this.state.pokemon_count)+1
-                        })
-                        alert(`Congratulation! ${retVal} join your team.`)
-                    }
+                API.postPokemon(data.pokemon_id, data.nickname).then(res=>{
+                    console.log(res)
+                    // if(res['data'] == 'success'){
+                    //     this.setState({
+                    //         pokemon_count: parseInt(this.state.pokemon_count)+1
+                    //     })
+                    //     alert(`Congratulation! ${retVal} join your team.`)
+                    // }
                 })
             }
             else{
