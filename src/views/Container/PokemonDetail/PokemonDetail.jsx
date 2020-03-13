@@ -50,7 +50,7 @@ class PokemonDetail extends Component {
         API.getPokemonOwned().then(res=>{
             let pokemon_count = 0;
             res.map(data=>{
-                if(pokemon_id == data.pokemon_id){
+                if(pokemon_id === data.pokemon_id){
                     pokemon_count ++;
                 }
             })
@@ -86,7 +86,7 @@ class PokemonDetail extends Component {
                     API.getAbilityData(ability_id).then(res=>{
                         data['short_effect'] = res.effect_entries[0].short_effect;
                         res.names.map(res=>{
-                            if(res.language.name == 'en'){
+                            if(res.language.name === 'en'){
                                 data['name'] = res.name;
                             }
                         });
@@ -103,7 +103,7 @@ class PokemonDetail extends Component {
                     API.getMoveData(move_id).then(res=>{
                         data['pp'] = res.pp;
                         res.names.map(res=>{
-                            if(res.language.name == 'en'){
+                            if(res.language.name === 'en'){
                                 data['name'] = res.name;
                             }
                         });
@@ -119,7 +119,7 @@ class PokemonDetail extends Component {
                     data['base_stat'] = res.base_stat;
                     API.getStatData(state_id).then(res=>{
                         res.names.map(res=>{
-                            if(res.language.name == 'en'){
+                            if(res.language.name === 'en'){
                                 data['name'] = res.name;
                             }
                         });
@@ -135,7 +135,7 @@ class PokemonDetail extends Component {
             API.getPokemonSpecies().then(res=>{
                 let nextId = parseInt(pokemon_id)+1
                 let prevId = parseInt(pokemon_id)-1
-                if(pokemon_id == 1){
+                if(pokemon_id === 1){
                     API.getPokemonData(nextId).then(res=>{
                         this.setState({
                             nextDetail:res.sprites.front_default,
@@ -144,7 +144,7 @@ class PokemonDetail extends Component {
                         })
                     })
                 }
-                else if(pokemon_id == res.count){
+                else if(pokemon_id === res.count){
                     API.getPokemonData(prevId).then(res=>{
                         this.setState({
                             prevDetail: res.sprites.front_default,
@@ -173,43 +173,43 @@ class PokemonDetail extends Component {
             
             let pokemon_species_data = {...this.state.pokemon_species_data};
             let pokemonColor = res.color.name;
-            if(pokemonColor == 'black'){
+            if(pokemonColor === 'black'){
                 pokemon_species_data['color'] = "#303943";
                 pokemon_species_data['textColor'] = "white";
             }
-            else if(pokemonColor == 'blue'){
+            else if(pokemonColor === 'blue'){
                 pokemon_species_data['color'] = "#58abf6";
                 pokemon_species_data['textColor'] = "white";
             }
-            else if(pokemonColor == 'brown'){
+            else if(pokemonColor === 'brown'){
                 pokemon_species_data['color'] = "#CA8179";
                 pokemon_species_data['textColor'] = "white";
             }
-            else if(pokemonColor == 'gray'){
+            else if(pokemonColor === 'gray'){
                 pokemon_species_data['color'] = "#F5F5F5";
                 pokemon_species_data['textColor'] = "#818181";
             }
-            else if(pokemonColor == 'green'){
+            else if(pokemonColor === 'green'){
                 pokemon_species_data['color'] = "#2CDAB1";
                 pokemon_species_data['textColor'] = "white";
             }
-            else if(pokemonColor == 'pink'){
+            else if(pokemonColor === 'pink'){
                 pokemon_species_data['color'] = "#FFB6C1";
                 pokemon_species_data['textColor'] = "#818181";
             }
-            else if(pokemonColor == 'purple'){
+            else if(pokemonColor === 'purple'){
                 pokemon_species_data['color'] = "#9F5BBA";
                 pokemon_species_data['textColor'] = "white";
             }
-            else if(pokemonColor == 'red'){
+            else if(pokemonColor === 'red'){
                 pokemon_species_data['color'] = "#F7786B";
                 pokemon_species_data['textColor'] = "white";
             }
-            else if(pokemonColor == 'white'){
+            else if(pokemonColor === 'white'){
                 pokemon_species_data['color'] = "white";
                 pokemon_species_data['textColor'] = "#818181";
             }
-            else if(pokemonColor == 'yellow'){
+            else if(pokemonColor === 'yellow'){
                 pokemon_species_data['color'] = "#FFCE4B";
                 pokemon_species_data['textColor'] = "white";
             }
@@ -241,7 +241,7 @@ class PokemonDetail extends Component {
                 }
                 API.postPokemon(data.pokemon_id, data.nickname).then(res=>{
                     console.log(res)
-                    if(res['status'] == '200'){
+                    if(res['status'] === '200'){
                         this.setState({
                             pokemon_count: parseInt(this.state.pokemon_count)+1
                         })
@@ -256,7 +256,7 @@ class PokemonDetail extends Component {
     }
     render() {
         const { currentPage } = this.state;
-        if(this.state.isLoad == true && this.state.abilities_data != undefined && this.state.moves_data != undefined && this.state.stats_data != undefined){
+        if(this.state.isLoad === true && this.state.abilities_data !== undefined && this.state.moves_data !== undefined && this.state.stats_data !== undefined){
             let biggestStatNumber = 0;
             this.state.stats_data.map(res=>{
                 if(res.base_stat > biggestStatNumber){
@@ -322,7 +322,7 @@ class PokemonDetail extends Component {
                                             <h4 style={{color:"white"}}>Other Info</h4>
                                             <hr className="separator" />
                                             {
-                                                this.state.pokemon_data.pokemon_height != undefined ?
+                                                this.state.pokemon_data.pokemon_height !== undefined ?
                                                 <div style={{color:"white"}}>Height - {this.state.pokemon_data.pokemon_height}</div>
                                                 :<div></div>
                                             }
@@ -332,7 +332,7 @@ class PokemonDetail extends Component {
                                         </div>
                                         <div>
                                             {
-                                                this.state.pokemon_data.pokemon_width != undefined ?
+                                                this.state.pokemon_data.pokemon_width !== undefined ?
                                                 <div>Width - {this.state.pokemon_data.pokemon_width}</div>
                                                 :<div></div>
                                             }
@@ -394,7 +394,7 @@ class PokemonDetail extends Component {
                                         <div className="col-lg-12 col-md-12 col-sm-12 col-12 mt-5" style={{overflowX:"auto"}}>
                                             <Pagination aria-label="Page navigation example" style={{width:"fit-content", marginLeft:"auto", marginRight:"auto"}}>
                                                     
-                                                    <img src={require('../../../assets/image/pagination/arrow-left.svg')} />
+                                                    <img src={require('../../../assets/image/pagination/arrow-left.svg')} alt="arrow-left"/>
 
                                                     {/* Previous Button for Pagination */}
                                                     <PaginationItem disabled={currentPage <= 0}>
@@ -453,12 +453,12 @@ class PokemonDetail extends Component {
                                 <div className="w-10 float-right">
                                     <div id="nextDetail">
                                         {
-                                            this.state.nextUrl != ""?
+                                            this.state.nextUrl !== ""?
                                             (
                                                 <a href={`../detail/${this.state.nextUrl}`}>
                                                     {   
                                                         <div>
-                                                            <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} />
+                                                            <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} alt="Next-Detail"/>
                                                             <p className="text-center">{this.state.nextId}</p>
                                                         </div>
                                                     }
