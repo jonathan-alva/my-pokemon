@@ -45,6 +45,7 @@ class PokemonDetail extends Component {
         this.handleCatchButton = this.handleCatchButton.bind(this);
     }
     async componentDidMount() {
+        document.title = 'Pokemon Detail'
         this.props.getInitalData();
         let pokemon_id = this.props.match.params.id;
         API.getPokemonOwned().then(res=>{
@@ -269,7 +270,7 @@ class PokemonDetail extends Component {
                         <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="row">
-                                    <div id="pokemon_details_image" className="col-lg-6 col-md-6 col-sm-12 col-12 p-5 mt-2" style={{backgroundColor:this.state.pokemon_species_data.color}}>
+                                    <div id="pokemon_details_image" className="col-lg-6 col-md-6 col-sm-12 col-12 p-5" style={{backgroundColor:this.state.pokemon_species_data.color}}>
                                         <img src={`${this.state.pokemon_data.front_default}`} style={{ objectFit: "cover", width: "100%", height: "100%" }} />
                                     </div>
                                     <div id="pokemon_details_description" className="col-lg-6 col-md-6 col-sm-12 col-12 p-5">

@@ -20,6 +20,7 @@ class PokemonOwned extends Component {
         await this.props.getInitalData();
     }
     async componentDidMount() {
+        document.title = 'Pokemon Owned'
         await this.getDataAPI();
         let pokemonOwnedData = this.props.pokemonOwned;
         this.setState({

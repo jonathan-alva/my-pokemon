@@ -34,6 +34,7 @@ class PokemonList extends Component {
     }
 
     async componentDidMount() {
+        document.title = 'Pokemon List'
         await this.getDataAPI();
         let pageNumber = parseInt(this.props.match.params.page);
         let page = pageNumber * 20;

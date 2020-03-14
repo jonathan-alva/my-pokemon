@@ -29,6 +29,7 @@ class PokemonHome extends Component {
     }
 
     async componentDidMount(){
+        document.title = 'Home'
         await this.getDataAPI();
         let pokemonTypesData = this.props.pokemonTypes;
         let pokemonOwnedData = this.props.pokemonOwned;
