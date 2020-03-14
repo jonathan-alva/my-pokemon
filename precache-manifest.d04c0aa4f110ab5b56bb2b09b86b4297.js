@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "536e82336eb0cabe4e899471d358ad32",
+    "revision": "a41bf358aa0f335e3d387e1eeec57ea6",
     "url": "/my-pokemon/index.html"
   },
   {
@@ -24,11 +24,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/my-pokemon/static/css/8.3e158abd.chunk.css"
   },
   {
-    "revision": "f0f9e2cadccc4b94af39",
+    "revision": "a546862729c4d6cf3edb",
     "url": "/my-pokemon/static/css/9.03c2b58a.chunk.css"
   },
   {
-    "revision": "1dd69124f0cfdbb5dbbc",
+    "revision": "696d5762e49bf6f7802e",
     "url": "/my-pokemon/static/css/main.523f09c5.chunk.css"
   },
   {
@@ -36,12 +36,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/my-pokemon/static/js/0.c566358e.chunk.js"
   },
   {
-    "revision": "95ae46168f7e70462467",
-    "url": "/my-pokemon/static/js/3.565a1099.chunk.js"
+    "revision": "93fe45f2cc88e3a6a490",
+    "url": "/my-pokemon/static/js/3.e27fd8dc.chunk.js"
   },
   {
     "revision": "f231859d6585c4cd5f80c344783ed269",
-    "url": "/my-pokemon/static/js/3.565a1099.chunk.js.LICENSE.txt"
+    "url": "/my-pokemon/static/js/3.e27fd8dc.chunk.js.LICENSE.txt"
   },
   {
     "revision": "1ea2e7b2584c5ef090e5",
@@ -72,16 +72,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/my-pokemon/static/js/8.3ab69ff7.chunk.js"
   },
   {
-    "revision": "f0f9e2cadccc4b94af39",
-    "url": "/my-pokemon/static/js/9.f56ec496.chunk.js"
+    "revision": "a546862729c4d6cf3edb",
+    "url": "/my-pokemon/static/js/9.a615a7dc.chunk.js"
   },
   {
-    "revision": "1dd69124f0cfdbb5dbbc",
-    "url": "/my-pokemon/static/js/main.de261470.chunk.js"
+    "revision": "696d5762e49bf6f7802e",
+    "url": "/my-pokemon/static/js/main.30dbc81b.chunk.js"
   },
   {
-    "revision": "71b95253a133dcda338b",
-    "url": "/my-pokemon/static/js/runtime-main.f2ad318d.js"
+    "revision": "c890e847ebef09935515",
+    "url": "/my-pokemon/static/js/runtime-main.5adb8550.js"
   },
   {
     "revision": "268e89298b9317286fce66edec9efcea",
