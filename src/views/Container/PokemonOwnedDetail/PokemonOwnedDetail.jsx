@@ -249,7 +249,7 @@ class PokemonOwnedDetail extends Component {
                 console.log(res)
                 if(res.status==='200'){
                     alert(`Bye ${this.state.pokemon_data.nickname}~`);
-                    window.location = '/owned';
+                    window.location = process.env.PUBLIC_URL+'/owned';
                 }
             })
             
@@ -443,7 +443,7 @@ class PokemonOwnedDetail extends Component {
                                         {
                                             this.state.prevUrl !== ""?
                                             (
-                                            <a href={`../detail/${this.state.prevUrl}`}>
+                                            <a href={process.env.PUBLIC_URL+`/owned/detail/${this.state.prevUrl}`}>
                                                 {
                                                     <div>
                                                         <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} alt="prevdetail"/>
@@ -460,7 +460,7 @@ class PokemonOwnedDetail extends Component {
                                         {
                                             this.state.nextUrl != ""?
                                             (
-                                                <a href={`../detail/${this.state.nextUrl}`}>
+                                                <a href={process.env.PUBLIC_URL+`/owned/detail/${this.state.nextUrl}`}>
                                                     {   
                                                         <div>
                                                             <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} alt="nextdetail"/>

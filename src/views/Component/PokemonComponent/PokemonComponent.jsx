@@ -14,7 +14,7 @@ class PokemonComponent extends Component{
     render(){
         return(
             <Fragment>
-                <a className="link-url" href={`${this.props.url}${this.props.data_id}`} style={{color:this.props.pokemon_text_color}}>
+                <a className="link-url" href={process.env.PUBLIC_URL+`${this.props.url}${this.props.data_id}`} style={{color:this.props.pokemon_text_color}}>
                     <div className="img-container" style={{ backgroundColor:this.props.pokemon_color}}>
                         <div className="row" style={{margin:0}}>
                             <div className="col-12 col-xs-6 col-md-6 ">
