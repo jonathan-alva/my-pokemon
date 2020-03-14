@@ -1,68 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hello! My name is **Jonathan Alva** and this is my simple project using React JS and [Pokemon API](https://pokeapi.co/).
+I'm new using React JS, I belive there are many mistake that I made in this Project. I think this is not a best practice to follow.
 
-## Available Scripts
+This Project Live at http://exzone97.github.io/my-pokemon
 
-In the project directory, you can run:
+## How To Install
 
-### `npm start`
+You need follow some step to running the project in your local.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `Make sure you have instal NPM, Node.js and Local Web Server`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Node version : **v12.14.0**<br />
+NPM version : **6.13.4**<br />
+PHP version : **7.4.2**<br />
 
-### `npm test`
+### `Clone the project`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can clone the project anywhere in your computer.<br />
+`git clone https://github.com/exzone97/my-pokemon.git`
 
-### `npm run build`
+### `Install NPM dependencies`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After clone you need to install all dependencies using `npm install`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### `Clone the PHP API that i use for this project`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You can clone the API to your `htdocs` folder. <br />
+`git clone https://github.com/exzone97/my-pokemon-api.git`
 
-### `npm run eject`
+### `Change some file configuration`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Open file `src -> service -> Config.js`. <br />
+Change the root path to `my-pokemon-api`. (ex 'localhost/my-pokemon-api'). <br />
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `Create Database to save your data`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Create database in your local. <br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### `Change connection configuration API`
 
-## Learn More
+Go to your API directory (ex. `htdocs->my-pokemon-api`). <br/>
+Open file name `conn.php`. <br />
+Change the database configuration on line `7`. <br />
+$conn = new mysqli('localhost', '<user>', '<password>', '<db name>');
+  
+### `I have create the file that contain a Dummy Data for this project`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In this directory there is a file called `schema.js`. <br/>
+You need to change some configuration in this file line host, user, password, and database. <br/>
+To run this file use command `node schema.js` in your directory of this project. The file will create table and insert some record.<br/>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `Run Project`
 
-### Code Splitting
+To run this project, make sure you have follow all instruction above. If an error occurs please contact me via email. <br/>
+Run the project using `npm start`. <br/>
+This project will running in port 3000. <br/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+If you have question about this project or the live project get error please let me know. <br/>
+Email : jonathan.alva97@yahoo.co.id
