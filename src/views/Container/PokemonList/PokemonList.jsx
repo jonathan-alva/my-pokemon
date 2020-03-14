@@ -42,7 +42,6 @@ class PokemonList extends Component {
             this.setState({
                 pokemonOwned: counts
             },()=>{
-                console.log(this.state.pokemonOwned)
                 API.getPokemonSpeciesOffset(page).then(res=>{
                     res.results.map(data=>{
                         let pokemonData = [];
@@ -182,7 +181,7 @@ class PokemonList extends Component {
                 
                 if(res!==[] && res.name !== undefined && res.id!==undefined && res.form.front_default!==undefined && res.color!== undefined && res.textColor !== undefined){
                 element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
-                        <PokemonComponent pokemon_nickname="" owned_total={res.owned_total} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} data_id={res.data_id} number={res.id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../detail/"/>
+                        <PokemonComponent pokemon_nickname="" owned_total={res.owned_total} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} data_id={res.data_id} number={res.id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="./#/detail/"/>
                     </div>]
                 }
             })
@@ -213,19 +212,19 @@ class PokemonList extends Component {
                                     <div>
                                         <ul className="pagination justify-content-center"> 
                                             <li className={`page-item ${this.state.prevDisable}`}> 
-                                                <a className="page-link" href={`./${this.state.prevButton}`}>Previous</a> 
+                                                <a className="page-link" href={`./#/list/${this.state.prevButton}`}>Previous</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.active1Button}`}> 
-                                                <a className="page-link" href={`./${this.state.number1Button}`}>{this.state.number1Button}</a> 
+                                                <a className="page-link" href={`./#/list/${this.state.number1Button}`}>{this.state.number1Button}</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.active2Button}`}> 
-                                                <a className="page-link" href={`./${this.state.number2Button}`}>{this.state.number2Button}</a> 
+                                                <a className="page-link" href={`./#/list/${this.state.number2Button}`}>{this.state.number2Button}</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.active3Button}`}> 
-                                                <a className="page-link" href={`./${this.state.number3Button}`}>{this.state.number3Button}</a> 
+                                                <a className="page-link" href={`./#/list/${this.state.number3Button}`}>{this.state.number3Button}</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.nextDisable}`}> 
-                                                <a className="page-link" href={`./${this.state.nextButton}`} disabled>Next</a> 
+                                                <a className="page-link" href={`./#/list/${this.state.nextButton}`} disabled>Next</a> 
                                             </li> 
                                         </ul> 
                                     </div>

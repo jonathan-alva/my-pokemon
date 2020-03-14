@@ -203,7 +203,7 @@ class PokemonHome extends Component {
                                             {
                                                 this.state.shown_pokemon_data.map((res, i)=>(
                                                     <div className="col-6" key={i}>
-                                                        <a href={`./owned/detail/${res.id}`}>
+                                                        <a href={`./#/owned/detail/${res.id}`}>
                                                             <img src={res.img.front_default} alt={res.nickname}/>
                                                             <h5>{res.nickname}</h5>
                                                         </a>
@@ -241,7 +241,7 @@ class PokemonHome extends Component {
                                     </div>
                                     
                                     <ButtonComponent
-                                        link_lihat="/owned" button_lihat="Go to storage"
+                                        link_lihat="./#/owned" button_lihat="Go to storage"
                                         colorButton="#212020" borderColorButton="black"
                                     />
                                 </div>

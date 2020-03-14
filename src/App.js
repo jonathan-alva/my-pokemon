@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Link } from 'react-router-dom';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 const DefaultLayout = React.lazy(() => import('./DefaultLayout'));
@@ -18,13 +18,16 @@ class App extends Component {
 	}
 	render(){
 		return (
-			<BrowserRouter basename="/my-pokemon">
-				<React.Suspense fallback={loading()}>
-					<Switch>
-						<Route path="/" name="Pokemon" render={props => (<DefaultLayout {...props} />)}/>
-					</Switch>
-				</React.Suspense>
-			</BrowserRouter>
+			<Fragment>
+				<HashRouter basename={process.env.PUBLIC_URL}>
+					<React.Suspense fallback={loading()}>
+						<Switch>
+							<Route path="/" name="Pokemon" render={props => (<DefaultLayout {...props} />)}/>
+						</Switch>
+						
+					</React.Suspense>
+				</HashRouter>
+			</Fragment>
 		);
 	}
 }
