@@ -2,6 +2,9 @@
     list-style-type: disc;
     font-family: 'Segoe UI Regular';
 }
+nav{
+    text-align: center;
+}
 #main_list li {
     margin-bottom: 2%;
     font-size: 17px;
@@ -31,6 +34,10 @@ a{
     text-decoration: none;
     color: white;
 }
+a:hover{
+    color: #e95e1e;
+    text-decoration: none;
+}
 .separator{
     border-top: 2px solid rgba(0,0,0,.3);
 }
@@ -44,7 +51,14 @@ a{
     }
     .second_section {
         padding-top: 10%;
-    }}
+    }
+    .page-link {
+        font-size: small;
+    }
+    .pagination{
+        display: inline-flex;
+    }
+}
 
 @media (min-width: 768px) and (max-width: 1024px) {
 

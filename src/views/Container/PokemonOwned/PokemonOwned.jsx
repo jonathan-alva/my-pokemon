@@ -13,15 +13,18 @@ class PokemonOwned extends Component {
 
         this.state = {
             currentData: [],
-            pageCount: 0,
         }
     }
-    componentDidMount() {
-        this.props.getInitalData();
+    getDataAPI = async () => {
+        await this.props.getInitalData();
+    }
+    async componentDidMount() {
+        await this.getDataAPI();
+        let pokemonOwnedData = this.props.pokemonOwned;
 
-        API.getPokemonOwned().then(res=>{
+        // API.getPokemonOwned().then(res=>{
             // console.log(res)
-            res.map(data=>{
+            pokemonOwnedData.map(data=>{
                 let pokemonData = [];
                 let currentData = [...this.state.currentData];
                 let pokemon_id = data.pokemon_id;
@@ -30,6 +33,7 @@ class PokemonOwned extends Component {
                 pokemonData['data_id'] = data.id;
                 API.getPokemonSpeciesData(pokemon_id).then(r=>{
                     let pokemonColor = r.color.name;
+                    pokemonData['speciesData'] = r;
                     if(pokemonColor === 'black'){
                         pokemonData['color'] = "#303943";
                         pokemonData['textColor'] = "white";
@@ -81,12 +85,6 @@ class PokemonOwned extends Component {
                         pokemonData['type1'] = pokemonTypeList[0].type.name.charAt(0).toUpperCase() + pokemonTypeList[0].type.name.slice(1);
                         pokemonData['type2'] = pokemonTypeList[1].type.name.charAt(0).toUpperCase() + pokemonTypeList[1].type.name.slice(1);
                     }
-                    if(r.sprites != null){
-                        // console.log(res)
-                        this.setState({
-                            pageCount: Math.floor(res.length/20)
-                        })
-                    }
                     pokemonData['form'] = r.sprites;
                     pokemonData['name'] = r.name.charAt(0).toUpperCase() + r.name.slice(1);
                     pokemonData['id'] = pokemon_id;
@@ -96,7 +94,7 @@ class PokemonOwned extends Component {
                     })
                 })
             })
-        })
+        // })
     }
 
     render() {
@@ -105,11 +103,61 @@ class PokemonOwned extends Component {
         let element = [];
         if(data.length !== 0){
             obj.sort((a,b)=>a.data_id - b.data_id);
-
             obj.map((res,i)=>{
-                if(res!==[] && res.name !== undefined && res.id!==undefined && res.form.front_default!==undefined && res.color!== undefined && res.textColor !== undefined){
+                let color = res.color;
+                let textColor = res.textColor;
+                if(color === undefined){
+                    if(res.speciesData !== undefined){
+                        let color_name = res.speciesData.color.name;
+                        if(color_name === 'black'){
+                            color = "#303943";
+                            textColor = "white";
+                        }
+                        else if(color_name === 'blue'){
+                            color = "#58abf6";
+                            textColor = "white";
+                        }
+                        else if(color_name === 'brown'){
+                            color = "#CA8179";
+                            textColor = "white";
+                        }
+                        else if(color_name === 'gray'){
+                            color = "#F5F5F5";
+                            textColor = "#818181";
+                        }
+                        else if(color_name === 'green'){
+                            color = "#2CDAB1";
+                            textColor = "white";
+                        }
+                        else if(color_name === 'pink'){
+                            color = "#FFB6C1";
+                            textColor = "#818181";
+                        }
+                        else if(color_name === 'purple'){
+                            color = "#9F5BBA";
+                            textColor = "white";
+                        }
+                        else if(color_name === 'red'){
+                            color = "#F7786B";
+                            textColor = "white";
+                        }
+                        else if(color_name === 'white'){
+                            color = "white";
+                            textColor = "#818181";
+                        }
+                        else if(color_name === 'yellow'){
+                            color = "#FFCE4B";
+                            textColor = "white";
+                        }
+                    }
+                }
+                else{
+                    color = res.color;
+                    textColor = res.textColor;
+                }
+                if(res!==[] && res.name !== undefined && res.id!==undefined && res.form.front_default!==undefined){
                     element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
-                        <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="/owned/detail/"/>
+                        <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={color} pokemon_text_color={textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="/owned/detail/"/>
                     </div>]
                 }
             })
