@@ -19,14 +19,14 @@ class App extends Component {
 	render(){
 		return (
 			<Fragment>
-				<HashRouter basename={process.env.PUBLIC_URL}>
+				<BrowserRouter basename={process.env.PUBLIC_URL}>
 					<React.Suspense fallback={loading()}>
 						<Switch>
 							<Route path="/" name="Pokemon" render={props => (<DefaultLayout {...props} />)}/>
 						</Switch>
 						
 					</React.Suspense>
-				</HashRouter>
+				</BrowserRouter>
 			</Fragment>
 		);
 	}
