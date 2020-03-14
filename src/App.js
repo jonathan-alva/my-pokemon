@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
-import { HashRouter, Route, Switch, Link } from 'react-router-dom';
+import { HashRouter, Route, Switch, Link, BrowserRouter } from 'react-router-dom';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 const DefaultLayout = React.lazy(() => import('./DefaultLayout'));

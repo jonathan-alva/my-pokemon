@@ -109,7 +109,7 @@ class PokemonOwned extends Component {
             obj.map((res,i)=>{
                 if(res!==[] && res.name !== undefined && res.id!==undefined && res.form.front_default!==undefined && res.color!== undefined && res.textColor !== undefined){
                     element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
-                        <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="../owned/detail/"/>
+                        <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={res.color} pokemon_text_color={res.textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="/owned/detail/"/>
                     </div>]
                 }
             })
