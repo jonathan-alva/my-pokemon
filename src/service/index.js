@@ -21,8 +21,13 @@ const getAbilityData = (id) => Get(`ability/${id}`, true)
 const getMoveData = (id) => Get(`move/${id}`, true);
 const getStatData = (id) => Get(`stat/${id}`, true);
 
+// Other way to Delelte data, but im using Get method cause the other method fail when I deploy the website.  
+// const deletePokemon = (id) => Delete(`Delete/DeletePokemon.php?id=${id}`, false);
 const deletePokemon = (id) => Get(`Delete/DeletePokemon.php?id=${id}`, false);
 
+// Other way to Post data, but im using Get method cause the other method fail when I deploy the website. If using Post method we need to
+// change the param where the method called.
+// const postPokemon = (data) => Post(`Post/PostPokemonOwned.php`, false, data);
 const postPokemon = (pokemon_id, nickname) => Get(`Post/PostPokemonOwned.php?pokemon_id=${pokemon_id}&nickname=${nickname}`, false);
 
 const API = {

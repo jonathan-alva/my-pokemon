@@ -14,7 +14,6 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		// console.log('a')
 	}
 	render(){
 		return (
@@ -24,7 +23,6 @@ class App extends Component {
 						<Switch>
 							<Route path="/" name="Pokemon" render={props => (<DefaultLayout {...props} />)}/>
 						</Switch>
-						
 					</React.Suspense>
 				</BrowserRouter>
 			</Fragment>

@@ -98,6 +98,18 @@ class PokemonOwned extends Component {
             })
         })
     }
+    handleReleaseButton = (data) =>{
+        if(window.confirm(`Are you sure want to release ${data.nickname} ?`)){
+            
+            API.deletePokemon(data.data_id).then(res=>{
+                if(res.status==='200'){
+                    alert(`Bye ${data.nickname}~`);
+                    window.location = `${process.env.PUBLIC_URL+"/owned"}`
+                }
+            })
+            
+        }
+	}
 
     render() {
         const data = this.state.currentData;
@@ -158,8 +170,9 @@ class PokemonOwned extends Component {
                     textColor = res.textColor;
                 }
                 if(res!==[] && res.name !== undefined && res.id!==undefined && res.form.front_default!==undefined){
-                    element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" key={i}>
+                    element = [...element, <div className="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style={{textAlign:"center"}} key={i}>
                         <PokemonComponent pokemon_nickname={res.nickname} pokemon_color={color} pokemon_text_color={textColor} pokemon_name={res.name} number={res.id} data_id={res.data_id} src={res.form.front_default} type1={res.type1} type2={res.type2} url="/owned/detail/"/>
+                        <button onClick={this.handleReleaseButton.bind(this,res)} className="btn btn-danger btn-sm buttonRelease" style={{position:"relative", marginLeft:"auto", marginRight:"auto"}}>Release</button>
                     </div>]
                 }
             })
