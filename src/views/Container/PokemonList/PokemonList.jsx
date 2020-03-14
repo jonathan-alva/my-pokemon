@@ -294,7 +294,24 @@ class PokemonList extends Component {
         else{
             
             return (
-                <div className="animated fadeIn pt-1 text-center">Loading...</div>
+                <div style={{overflow:"hidden"}}>
+                    <div className="container-fluid" style={{ backgroundColor: "#2c2c2c", paddingLeft: "0", paddingRight: "0" }}>
+                        <div id="pokemon_list_header">
+                            <div className="p-2 content_pokemon_list_header rounded" style={{backgroundColor:"rgba(69,148,205,0.9)"}}>
+                                <TitleComponent
+                                    title_middle="POKEMON LIST"
+                                />
+                                <DescriptionComponent
+                                    description_text="This is a list of every Pokemon in this world."
+                                    description_text_color="white"
+                                    description_padding_right="0"
+                                    fontSize="1.5rem"
+                                />
+                            </div>
+                        </div>
+                        <div style={{color:"white"}} className="animated fadeIn pt-1 text-center">Loading...</div>
+                    </div>
+                </div>
             );
         }
         
