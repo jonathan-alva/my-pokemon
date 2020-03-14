@@ -4,6 +4,8 @@ import TitleComponent from '../../Component/TitleComponent/TitleComponent';
 import ButtonComponent from '../../Component/ButtonComponent/ButtonComponent';
 import DescriptionComponent from '../../Component/DescriptionComponent/DescriptionComponent';
 import "./PokemonHome.css";
+import { connect } from 'react-redux';
+import { getInitalData } from "../../../redux/reducer/globalReducer";
 import API from "../../../service";
 class PokemonHome extends Component {
     constructor(props){
@@ -21,128 +23,126 @@ class PokemonHome extends Component {
             type_count : 0,
         }
     }
+
+    getDataAPI = async () => {
+        await this.props.getInitalData();
+    }
+
     async componentDidMount(){
-        await API.getPokemonTypes().then(res=>{
-            let pokemon_data_by_type = []
-            this.setState({
-                type_count: res.count
-            })
-            let listOfTemp = []
-            res.results.map(async data=>{
-                let type_id = data.url.split('/')[6];
-                await API.getPokemonTypesData(type_id).then(res=>{
-                    let temp = []
-                    res.names.map(name=>{
-                        if(name.language.name === 'en'){
-                            temp['type'] = name.name
-                        }
-                    })
-                    temp['type_url'] = data.url
-                    temp['count'] = 0
-                    pokemon_data_by_type = [...pokemon_data_by_type, temp]
-                    
-                })
-                this.setState({
-                    pokemon_types: pokemon_data_by_type,
-                })
-                listOfTemp = pokemon_data_by_type
-                if(listOfTemp.length === this.state.type_count){
-                    API.getPokemonOwned().then(res=>{
-                        let pokemon_types_obj = this.state.pokemon_types
-                        res.map(data=>{
-                            API.getPokemonData(data.pokemon_id).then(pokemon=>{
-                                let pokemon_type = pokemon.types;
-                                pokemon_type.map(type=>{
-                                    pokemon_types_obj.map(r=>{
-                                        if(r.type_url === type.type.url){
-                                            r.count = r.count+1
-                                        }
-                                    })
-                                })
-                                this.setState({
-                                    pokemon_data_type:pokemon_types_obj
-                                })
-                            })
-                        })
-                    });
-                }
-            })
+        await this.getDataAPI();
+        let pokemonTypesData = this.props.pokemonTypes;
+        let pokemonOwnedData = this.props.pokemonOwned;
+        let pokemonOwnedCountData = this.props.pokemonOwnedCount;
+
+        let pokemon_data_by_type = []
+        this.setState({
+            type_count: pokemonTypesData.count
         })
-        
-        
-        API.getPokemonOwned().then(res=>{
-            
-
-            this.setState({
-                pokemon_count_total: res.length,
-                pokemon_data: res
-            },()=>{
-                let array = []
-                if(this.state.pokemon_count_total <= 6){
-                    let shown_pokemon = [...this.state.shown_pokemon];
-                    res.map(data=>{
-                        shown_pokemon = [...shown_pokemon, data];
-                    })
-                    console.log(shown_pokemon)
-                    this.setState({
-                        shown_pokemon: shown_pokemon,
-                        shown_pokemon_count: this.state.pokemon_count_total
-                    },()=>{
-                        let result = [];
-                        this.state.shown_pokemon.map(async data=>{
-                            await API.getPokemonData(data.pokemon_id).then(res=>{
-                                console.log(res)
-                                let pokemonData = [];
-                                pokemonData['img'] = res.sprites
-                                pokemonData['nickname'] = data.nickname
-                                pokemonData['id'] = data.id
-                                result = [...result, pokemonData]
-                                this.setState({
-                                    shown_pokemon_data: result
-                                })
-                            })
-                        })
-                    })
-                }
-                else{
-                    let shown_pokemon = [...this.state.shown_pokemon];
-                    res.map(data=>{
-                        array = [...array, data.id];
-                    })
-                    let currentData = res;
-
-                    for(let i = 0;i< 6;i++){
-                        let random = currentData[Math.floor(Math.random()*currentData.length)]
-                        shown_pokemon = [...shown_pokemon, random];
-                        const index = currentData.indexOf(random);
-                        currentData.splice(index, 1);
+        let listOfTemp = []
+        pokemonTypesData.results.map(async data=>{
+            let type_id = data.url.split('/')[6];
+            await API.getPokemonTypesData(type_id).then(res=>{
+                let temp = []
+                res.names.map(name=>{
+                    if(name.language.name === 'en'){
+                        temp['type'] = name.name
                     }
-                    this.setState({
-                        shown_pokemon:shown_pokemon,
-                        shown_pokemon_count: 6
-                    },()=>{
-                        let result = [];
-                        this.state.shown_pokemon.map(async data=>{
-                            await API.getPokemonData(data.pokemon_id).then(res=>{
-                                console.log(res)
-                                let pokemonData = [];
-                                pokemonData['img'] = res.sprites
-                                pokemonData['nickname'] = data.nickname
-                                pokemonData['id'] = data.id
-                                result = [...result, pokemonData]
-                                this.setState({
-                                    shown_pokemon_data: result
-                                })
+                })
+                temp['type_url'] = data.url
+                temp['count'] = 0
+                pokemon_data_by_type = [...pokemon_data_by_type, temp]
+                
+            })
+            this.setState({
+                pokemon_types: pokemon_data_by_type,
+            })
+            listOfTemp = pokemon_data_by_type
+            if(listOfTemp.length === this.state.type_count){
+                let pokemon_types_obj = this.state.pokemon_types
+                pokemonOwnedData.map(data=>{
+                    API.getPokemonData(data.pokemon_id).then(pokemon=>{
+                        let pokemon_type = pokemon.types;
+                        pokemon_type.map(type=>{
+                            pokemon_types_obj.map(r=>{
+                                if(r.type_url === type.type.url){
+                                    r.count = r.count+1
+                                }
+                            })
+                        })
+                        this.setState({
+                            pokemon_data_type:pokemon_types_obj
+                        })
+                    })
+                })
+            }
+        })
+        
+        this.setState({
+            pokemon_count_total: pokemonOwnedData.length,
+            pokemon_data: pokemonOwnedData
+        },()=>{
+            let array = []
+            if(this.state.pokemon_count_total <= 6){
+                let shown_pokemon = [...this.state.shown_pokemon];
+                pokemonOwnedData.map(data=>{
+                    shown_pokemon = [...shown_pokemon, data];
+                })
+                console.log(shown_pokemon)
+                this.setState({
+                    shown_pokemon: shown_pokemon,
+                    shown_pokemon_count: this.state.pokemon_count_total
+                },()=>{
+                    let result = [];
+                    this.state.shown_pokemon.map(async data=>{
+                        await API.getPokemonData(data.pokemon_id).then(res=>{
+                            console.log(res)
+                            let pokemonData = [];
+                            pokemonData['img'] = res.sprites
+                            pokemonData['nickname'] = data.nickname
+                            pokemonData['id'] = data.id
+                            result = [...result, pokemonData]
+                            this.setState({
+                                shown_pokemon_data: result
                             })
                         })
                     })
+                })
+            }
+            else{
+                let shown_pokemon = [...this.state.shown_pokemon];
+                pokemonOwnedData.map(data=>{
+                    array = [...array, data];
+                })
+                let currentData = array;
+                for(let i = 0;i< 6;i++){
+                    let random = currentData[Math.floor(Math.random()*currentData.length)]
+                    shown_pokemon = [...shown_pokemon, random];
+                    const index = currentData.indexOf(random);
+                    currentData.splice(index, 1);
                 }
-            })
+                this.setState({
+                    shown_pokemon:shown_pokemon,
+                    shown_pokemon_count: 6
+                },()=>{
+                    let result = [];
+                    this.state.shown_pokemon.map(async data=>{
+                        await API.getPokemonData(data.pokemon_id).then(res=>{
+                            let pokemonData = [];
+                            pokemonData['img'] = res.sprites
+                            pokemonData['nickname'] = data.nickname
+                            pokemonData['id'] = data.id
+                            result = [...result, pokemonData]
+                            this.setState({
+                                shown_pokemon_data: result
+                            })
+                        })
+                    })
+                })
+            }
         })
-        API.getPokemonOwnedCount().then(res=>{
-            this.setState({
-                pokemon_count_unique: res.length
-            })
+
+        this.setState({
+            pokemon_count_unique: pokemonOwnedCountData.length
         })
 
     }
@@ -262,4 +262,7 @@ class PokemonHome extends Component {
 
 }
 
-export default PokemonHome;
+export default connect(
+    state => state,
+    { getInitalData }
+)(PokemonHome);

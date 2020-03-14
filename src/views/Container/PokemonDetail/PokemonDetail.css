@@ -2,6 +2,9 @@
     list-style-type: disc;
     font-family: 'Segoe UI Regular';
 }
+nav{
+    text-align: center;
+}
 #main_list li {
     margin-bottom: 2%;
     font-size: 17px;
@@ -15,7 +18,10 @@
     font-family: 'Segoe UI Bold';
     font-size: medium;
 }
-
+a:hover{
+    color: #e95e1e;
+    text-decoration: none;
+}
 li.page-item.active .page-link {
     background-color: transparent;
     color: #e95e1e;
@@ -44,7 +50,15 @@ a{
     }
     .second_section {
         padding-top: 10%;
-    }}
+    }
+
+    .page-link {
+        font-size: small;
+    }
+    .pagination{
+        display: inline-flex;
+    }
+}
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
