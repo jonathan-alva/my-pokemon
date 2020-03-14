@@ -212,19 +212,19 @@ class PokemonList extends Component {
                                     <div>
                                         <ul className="pagination justify-content-center"> 
                                             <li className={`page-item ${this.state.prevDisable}`}> 
-                                                <a className="page-link" href={`/list/${this.state.prevButton}`}>Previous</a> 
+                                                <a className="page-link" href={process.env.PUBLIC_URL+`/list/${this.state.prevButton}`}>Previous</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.active1Button}`}> 
-                                                <a className="page-link" href={`/list/${this.state.number1Button}`}>{this.state.number1Button}</a> 
+                                                <a className="page-link" href={process.env.PUBLIC_URL+`/list/${this.state.number1Button}`}>{this.state.number1Button}</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.active2Button}`}> 
-                                                <a className="page-link" href={`/list/${this.state.number2Button}`}>{this.state.number2Button}</a> 
+                                                <a className="page-link" href={process.env.PUBLIC_URL+`/list/${this.state.number2Button}`}>{this.state.number2Button}</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.active3Button}`}> 
-                                                <a className="page-link" href={`/list/${this.state.number3Button}`}>{this.state.number3Button}</a> 
+                                                <a className="page-link" href={process.env.PUBLIC_URL+`/list/${this.state.number3Button}`}>{this.state.number3Button}</a> 
                                             </li> 
                                             <li className={`page-item ${this.state.nextDisable}`}> 
-                                                <a className="page-link" href={`/list/${this.state.nextButton}`} disabled>Next</a> 
+                                                <a className="page-link" href={process.env.PUBLIC_URL+`/list/${this.state.nextButton}`} disabled>Next</a> 
                                             </li> 
                                         </ul> 
                                     </div>

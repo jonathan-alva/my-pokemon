@@ -437,7 +437,7 @@ class PokemonDetail extends Component {
                                         {
                                             this.state.prevUrl != ""?
                                             (
-                                            <a href={`/detail/${this.state.prevUrl}`}>
+                                            <a href={process.env.PUBLIC_URL+`/detail/${this.state.prevUrl}`}>
                                                 {
                                                     <div>
                                                         <img src={`${this.state.prevDetail}`} style={{width: "100%", height: "100%" }} />
@@ -455,7 +455,7 @@ class PokemonDetail extends Component {
                                         {
                                             this.state.nextUrl !== ""?
                                             (
-                                                <a href={`/detail/${this.state.nextUrl}`}>
+                                                <a href={process.env.PUBLIC_URL+`/detail/${this.state.nextUrl}`}>
                                                     {   
                                                         <div>
                                                             <img src={`${this.state.nextDetail}`} style={{width: "100%", height: "100%" }} alt="Next-Detail"/>
